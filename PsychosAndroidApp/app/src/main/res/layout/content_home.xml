@@ -24,7 +24,6 @@
         android:text="Click me"
         android:id="@+id/buttonChange"
         android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="90dp" />
 </RelativeLayout>
