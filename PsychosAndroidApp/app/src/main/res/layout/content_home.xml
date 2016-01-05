@@ -12,18 +12,36 @@
     tools:context="com.example.iilant.psychosandroidapp.HomeActivity"
     tools:showIn="@layout/activity_home">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="left"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click me"
-        android:id="@+id/buttonChange"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="90dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/business_app_name"
+                android:id="@+id/businessAppName"
+                android:textSize="36dp"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/business_app_desc"
+                android:id="@+id/businessAppDescription"
+                android:textSize="18dp"
+                android:fontFamily="sans-serif" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </RelativeLayout>
