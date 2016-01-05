@@ -3,5 +3,7 @@
     <string name="business_app_name">What\s The Weather Inside You!?</string>
     <string name="business_app_desc">Your everyday test meter for calculating yout everyday mood and stress levels! After a short test our psycho-budda will give you the best advice for your situation!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_authfrom">Login / Sign In</string>
+    <string name="action_statistic">Statistics</string>
     <string name="button">Click me</string>
 </resources>
