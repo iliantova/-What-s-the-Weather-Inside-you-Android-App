@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PsychosAndroidApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="button">Click me</string>
+</resources>
