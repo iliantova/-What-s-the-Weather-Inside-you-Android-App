@@ -1,0 +1,5 @@
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\bin\Debug\PsyhosAndroidAppServer.Common.dll
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\bin\Debug\PsyhosAndroidAppServer.Common.pdb
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\obj\Debug\PsyhosAndroidAppServer.Common.dll
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\obj\Debug\PsyhosAndroidAppServer.Common.pdb
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\obj\Debug\PsyhosAndroidAppServer.Common.csprojResolveAssemblyReference.cache

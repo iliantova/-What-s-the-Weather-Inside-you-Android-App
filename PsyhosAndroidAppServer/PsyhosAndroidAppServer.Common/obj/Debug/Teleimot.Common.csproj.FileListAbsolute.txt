@@ -1,0 +1,9 @@
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\Teleimot.Common\bin\Debug\Teleimot.Common.dll
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\Teleimot.Common\bin\Debug\Teleimot.Common.pdb
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\Teleimot.Common\obj\Debug\Teleimot.Common.dll
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\Teleimot.Common\obj\Debug\Teleimot.Common.pdb
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\bin\Debug\Teleimot.Common.dll
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\bin\Debug\Teleimot.Common.pdb
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\obj\Debug\Teleimot.Common.csprojResolveAssemblyReference.cache
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\obj\Debug\Teleimot.Common.dll
+D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\PsyhosAndroidAppServer.Common\obj\Debug\Teleimot.Common.pdb
