@@ -24,12 +24,16 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="wrap_content"
+
+        <com.psychoapp.iliev.psychoapp.ProportionalImageView
+            android:id="@+id/img"
+            android:src="@drawable/aquarell_night_400_645"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/aquarell_night"
-            android:scaleType="fitXY"/>
+            android:adjustViewBounds="true" />
+
         <include layout="@layout/content_main" />
+
     </FrameLayout>
 
 
