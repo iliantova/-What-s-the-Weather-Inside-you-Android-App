@@ -1,5 +1,7 @@
 package com.psychoapp.iliev.psychoapp;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,21 +12,39 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int NUM_BACKGROUNDS = 3; // or whatever
+    private Random mRandom = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        View v = findViewById(R.id.background_image);
+        int res;
+        int i =  mRandom.nextInt(NUM_BACKGROUNDS);
+        switch (i) {
+            case 0: res = R.drawable.c; break;
+            case 1: res = R.drawable.b; break;
+            case 2: res = R.drawable.c; break;
+            default: throw new IllegalArgumentException("oops?");
+        }
+        v.setBackgroundResource(res);
+
+        // use this for custom font importing to UI elements
         Button btn1 = (Button) findViewById(R.id.action_login);
         Button btn2 = (Button) findViewById(R.id.action_quiz);
-
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/vladimir.ttf");
         btn1.setTypeface(face);
         btn2.setTypeface(face);
 
+        //the bottom floating menu
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
           @Override
