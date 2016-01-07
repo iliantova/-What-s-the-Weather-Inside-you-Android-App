@@ -1,5 +1,7 @@
 package com.psychoapp.iliev.psychoapp;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,7 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
+
+    private final int BACKGROUNDS_IMAGES = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,19 @@ public class MainActivity extends AppCompatActivity {
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         btn1.setTypeface(face);
         btn2.setTypeface(face);
+
+        // set random background image for each new load
+        View v = (View) findViewById(R.id.background_image);
+        Random r = new Random();
+        int randomInt = r.nextInt(BACKGROUNDS_IMAGES);
+        int res;
+        switch (randomInt) {
+            case 0 : res = R.drawable.b; break;
+            case 1 : res = R.drawable.c; break;
+            case 2 : res = R.drawable.aquarell_night_400_645; break;
+            default: res = R.drawable.aquarell_night_400_645; break;
+        }
+        v.setBackgroundResource(res);
 
         //the bottom floating menu
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
