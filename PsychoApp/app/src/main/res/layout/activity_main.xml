@@ -7,34 +7,45 @@
     android:fitsSystemWindows="true"
     tools:context="com.psychoapp.iliev.psychoapp.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.psychoapp.iliev.psychoapp.ProportionalImageView
-            android:id="@+id/img"
+            android:id="@+id/background_image"
             android:src="@drawable/aquarell_night_400_645"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true" />
 
-        <include layout="@layout/content_main" />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/action_login"
+                    android:text="@string/action_login"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/white"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/action_quiz"
+                    android:text="@string/action_quiz"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+            <include layout="@layout/content_main" />
+        </LinearLayout>
     </FrameLayout>
+
+
 
 
     <android.support.design.widget.FloatingActionButton
