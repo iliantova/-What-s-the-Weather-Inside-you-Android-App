@@ -4,9 +4,9 @@
     <string name="action_login">Sign In</string>
     <string name="action_quiz">Test Now!</string>
 
-    <array name="myImages">
+    <integer-array name="myImages">
         <item>@drawable/aquarell_night_400_645</item>
         <item>@drawable/b</item>
         <item>@drawable/c</item>
-    </array>
+    </integer-array>
 </resources>
