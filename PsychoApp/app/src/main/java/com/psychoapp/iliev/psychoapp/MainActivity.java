@@ -34,17 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-
         // use this for custom font importing to selected UI elements
         // fonts are situated in assets/fonts
-        Button btn1 = (Button) findViewById(R.id.action_login);
-        Button btn2 = (Button) findViewById(R.id.action_quiz);
+        Button loginButton = (Button) findViewById(R.id.action_login);
+        Button signupButton = (Button) findViewById(R.id.action_quiz);
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
-        btn1.setTypeface(face);
-        btn2.setTypeface(face);
-
+        loginButton.setTypeface(face);
+        signupButton.setTypeface(face);
 
         // set random background image for each new app load
         // add quality backgrounds in drawable and refactor the BACKGROUND_IMAGES_NUM + switch/case
@@ -69,5 +65,37 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // set onClickListeners for the buttons
+        loginButton.setOnClickListener(mButtonsListener);
+        signupButton.setOnClickListener(mButtonsListener);
+
     }
+
+
+    // Create an anonymous implementation of OnClickListener
+    private View.OnClickListener mButtonsListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            // do something when the button is clicked
+            // Yes we will handle click here but which button clicked??? We don't know
+
+            // So we will make
+            switch (v.getId() /*to get clicked view id**/) {
+                case R.id.action_login:
+
+                    // do something when the action_login is clicked
+                    Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                    startActivity(intent);
+
+                    break;
+                case R.id.action_quiz:
+
+                    // do something when the action_quiz is clicked
+
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }
