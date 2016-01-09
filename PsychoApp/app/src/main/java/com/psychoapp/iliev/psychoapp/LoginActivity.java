@@ -12,12 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private static final int BACKGROUND_IMAGES_NUM = 3;
 
     @Bind(R.id.input_email) EditText _emailText;
     @Bind(R.id.input_password) EditText _passwordText;
@@ -29,6 +32,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        // set random background image for each new app load
+        // add quality backgrounds in drawable and refactor the BACKGROUND_IMAGES_NUM + switch/case
+        ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
+        Random r = new Random();
+        int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
+        int res;
+        switch (randomInt) {
+            case 0 : res = R.drawable.c; break;
+            case 1 : res = R.drawable.c; break;
+            case 2 : res = R.drawable.aquarell_night_400_645; break;
+            default: res = R.drawable.aquarell_night_400_645; break;
+        }
+        v.setBackgroundResource(res);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 

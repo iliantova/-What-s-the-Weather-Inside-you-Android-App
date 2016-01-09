@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int BACKGROUND_IMAGES_NUM = 3;
+    private static final int BACKGROUND_IMAGES_NUM = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
         int res;
         switch (randomInt) {
-            case 0 : res = R.drawable.b; break;
+            case 0 : res = R.drawable.c; break;
             case 1 : res = R.drawable.c; break;
             case 2 : res = R.drawable.aquarell_night_400_645; break;
             default: res = R.drawable.aquarell_night_400_645; break;

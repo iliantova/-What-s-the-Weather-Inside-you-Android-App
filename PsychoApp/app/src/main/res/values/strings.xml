@@ -6,7 +6,6 @@
 
     <array name="myImages">
         <item>@drawable/aquarell_night_400_645</item>
-        <item>@drawable/b</item>
         <item>@drawable/c</item>
     </array>
 
@@ -14,4 +13,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_control">ControlActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="btn_login">Login</string>
+    <string name="login_google">Login with Google account</string>
+    <string name="no_account">No account yet? Create one</string>
 </resources>
