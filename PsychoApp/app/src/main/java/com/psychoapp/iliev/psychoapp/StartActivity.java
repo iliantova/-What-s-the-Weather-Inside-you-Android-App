@@ -29,7 +29,7 @@ public class StartActivity extends AppCompatActivity {
         int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
         int res;
         switch (randomInt) {
-            case 0 : res = R.drawable.b; break;
+            case 0 : res = R.drawable.c; break;
             case 1 : res = R.drawable.c; break;
             case 2 : res = R.drawable.aquarell_night_400_645; break;
             default: res = R.drawable.aquarell_night_400_645; break;
