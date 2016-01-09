@@ -9,18 +9,32 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.Random;
+
 public class StartActivity extends AppCompatActivity {
+
+    private final int BACKGROUND_IMAGES_NUM = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//toolbar.setLogo(R.drawable.flag);
-
        toolbar.setLogo(R.drawable.logo);
+
+        ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
+        Random r = new Random();
+        int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
+        int res;
+        switch (randomInt) {
+            case 0 : res = R.drawable.b; break;
+            case 1 : res = R.drawable.c; break;
+            case 2 : res = R.drawable.aquarell_night_400_645; break;
+            default: res = R.drawable.aquarell_night_400_645; break;
+        }
+        v.setBackgroundResource(res);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

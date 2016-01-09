@@ -7,6 +7,13 @@
     android:fitsSystemWindows="true"
     tools:context="com.psychoapp.iliev.psychoapp.StartActivity">
 
+    <com.psychoapp.iliev.psychoapp.ProportionalImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:alpha="0.7"/>
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/themeDirtyWhite"
-            android:alpha="0.6"
+            android:alpha="0.8"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
