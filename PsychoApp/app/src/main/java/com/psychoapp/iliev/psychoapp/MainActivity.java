@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         // set random background image for each new app load
         // add quality backgrounds in drawable and refactor the BACKGROUND_IMAGES_NUM + switch/case
-        ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
+        final ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
         Random r = new Random();
         int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
         int res;
@@ -75,6 +77,22 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(mButtonsListener);
         signupButton.setOnClickListener(mButtonsListener);
 
+        // fade in animation for background image (can use fadeout as well)
+        Animation fadeIn = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
+        v.startAnimation(fadeIn);
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
     }
 
 

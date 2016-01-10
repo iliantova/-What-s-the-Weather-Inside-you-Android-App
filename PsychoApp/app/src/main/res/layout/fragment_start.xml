@@ -9,5 +9,4 @@
     tools:context="com.psychoapp.iliev.psychoapp.StartActivityFragment"
     tools:showIn="@layout/activity_start">
 
-
 </RelativeLayout>

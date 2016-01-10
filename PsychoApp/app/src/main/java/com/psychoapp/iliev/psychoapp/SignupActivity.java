@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_signup) Button _signupButton;
     @Bind(R.id.link_login) TextView _loginLink;
+    @Bind(R.id.link_login_anon) TextView _loginAnonLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,33 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        _loginAnonLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Finish the registration screen and load the anonymious usage pageview
+                Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        Animation fadeIn = AnimationUtils.loadAnimation(SignupActivity.this, R.anim.fade_in);
+        v.startAnimation(fadeIn);
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
     }
 
     public void signup() {
@@ -88,7 +118,8 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
-
+        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+        startActivity(intent);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -96,8 +127,7 @@ public class SignupActivity extends AppCompatActivity {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
                         onSignupSuccess();
-                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                        startActivity(intent);
+
                         // onSignupFailed();
                         progressDialog.dismiss();
                     }

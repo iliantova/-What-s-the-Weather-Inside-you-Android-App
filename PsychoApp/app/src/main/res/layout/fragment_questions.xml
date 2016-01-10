@@ -7,9 +7,11 @@
     tools:context="com.psychoapp.iliev.psychoapp.QuestionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview_question"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listview_question"
+            android:orientation="vertical"/>
+
 
 </RelativeLayout>
