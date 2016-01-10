@@ -31,8 +31,8 @@ public class StartActivity extends AppCompatActivity {
         switch (randomInt) {
             case 0 : res = R.drawable.c; break;
             case 1 : res = R.drawable.c; break;
-            case 2 : res = R.drawable.aquarell_night_400_645; break;
-            default: res = R.drawable.aquarell_night_400_645; break;
+            case 2 : res = R.drawable.aquarell_night_400_655; break;
+            default: res = R.drawable.aquarell_night_400_655; break;
         }
         v.setBackgroundResource(res);
 

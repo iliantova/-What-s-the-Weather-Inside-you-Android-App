@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
         switch (randomInt) {
             case 0 : res = R.drawable.c; break;
             case 1 : res = R.drawable.c; break;
-            case 2 : res = R.drawable.aquarell_night_400_645; break;
-            default: res = R.drawable.aquarell_night_400_645; break;
+            case 2 : res = R.drawable.aquarell_night_400_655; break;
+            default: res = R.drawable.aquarell_night_400_655; break;
         }
         v.setBackgroundResource(res);
 
-        //the bottom floating menu
+        /*//the bottom floating menu
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         // set onClickListeners for the buttons
         loginButton.setOnClickListener(mButtonsListener);

@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         switch (randomInt) {
             case 0 : res = R.drawable.c; break;
             case 1 : res = R.drawable.c; break;
-            case 2 : res = R.drawable.aquarell_night_400_645; break;
-            default: res = R.drawable.aquarell_night_400_645; break;
+            case 2 : res = R.drawable.aquarell_night_400_655; break;
+            default: res = R.drawable.aquarell_night_400_655; break;
         }
         v.setBackgroundResource(res);
 
@@ -92,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
+                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                        startActivityForResult(intent, REQUEST_SIGNUP);
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }

@@ -1,6 +1,7 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -40,8 +41,8 @@ public class SignupActivity extends AppCompatActivity {
         switch (randomInt) {
             case 0 : res = R.drawable.c; break;
             case 1 : res = R.drawable.c; break;
-            case 2 : res = R.drawable.aquarell_night_400_645; break;
-            default: res = R.drawable.aquarell_night_400_645; break;
+            case 2 : res = R.drawable.aquarell_night_400_655; break;
+            default: res = R.drawable.aquarell_night_400_655; break;
         }
         v.setBackgroundResource(res);
 
@@ -83,12 +84,15 @@ public class SignupActivity extends AppCompatActivity {
 
         // TODO: Implement your own signup logic here.
 
+
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
                         onSignupSuccess();
+                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                        startActivity(intent);
                         // onSignupFailed();
                         progressDialog.dismiss();
                     }
