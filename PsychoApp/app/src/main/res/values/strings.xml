@@ -5,7 +5,7 @@
     <string name="action_quiz">Test Now!</string>
 
     <array name="myImages">
-        <item>@drawable/aquarell_night_400_645</item>
+        <item>@drawable/aquarell_night_400_655</item>
         <item>@drawable/c</item>
     </array>
 
@@ -15,6 +15,10 @@
     <string name="action_settings">Logout</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="btn_login">Login</string>
-    <string name="login_google">Login with google acount</string>
-    <string name="no_account">No acount yet!Register here!</string>
+    <string name="login_google">Login with Google acount</string>
+    <string name="no_account">No acount yet!? Register here!</string>
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="skip">Skip</string>
+    <string name="samplequestion">Sample quiz question</string>
+    <string name="btn_sample_answer">Answer option</string>
 </resources>
