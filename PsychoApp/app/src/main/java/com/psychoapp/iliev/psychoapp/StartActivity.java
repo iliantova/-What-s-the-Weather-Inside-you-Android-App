@@ -40,15 +40,6 @@ public class StartActivity extends AppCompatActivity {
             default: res = R.drawable.aquarell_night_400_655; break;
         }
         v.setBackgroundResource(res);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
