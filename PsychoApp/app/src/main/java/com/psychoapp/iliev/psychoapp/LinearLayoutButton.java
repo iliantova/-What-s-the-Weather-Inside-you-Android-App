@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class LinearLayoutButton extends LinearLayout {
 
-    public LinearLayoutButton(Context context, int id)
+    public LinearLayoutButton(View view, Context context, int id)
     {
         super(context);
 
@@ -22,7 +22,7 @@ public class LinearLayoutButton extends LinearLayout {
             return;
 
         // find relative layout by id
-        View v = ((Activity)context).findViewById(id);
+        View v = view.findViewById(id);
 
         // is it RelativeLayout ?
         if (!(v instanceof LinearLayout))
@@ -38,8 +38,7 @@ public class LinearLayoutButton extends LinearLayout {
         // here I am using temporary instance of Button class
         // to get standard button background and to get button text color
 
-        Button bt = new Button(context);
-        this.setBackgroundDrawable(bt.getBackground());
+
 
         // copy all child from relative layout to this button
         while (layout.getChildCount() > 0)
@@ -50,10 +49,6 @@ public class LinearLayoutButton extends LinearLayout {
 
             // if child is textView set its color to standard buttong text colors
             // using temporary instance of Button class
-            if (vchild instanceof TextView  )
-            {
-                ((TextView)vchild).setTextColor(bt.getTextColors());
-            }
 
             // just to be sure that child views can't be clicked and focused
             vchild.setClickable(false);
@@ -80,9 +75,9 @@ public class LinearLayoutButton extends LinearLayout {
     }
 
     // method for setting texts for the text views
-    public void setText(int id, CharSequence text)
+    public void setText(View view, int id, CharSequence text)
     {
-        View v = findViewById(id);
+        View v = view.findViewById(id);
         if (null != v && v instanceof TextView)
         {
             ((TextView)v).setText(text);
@@ -90,10 +85,10 @@ public class LinearLayoutButton extends LinearLayout {
 
     }
     // method for setting drawable for the images
-    public void setImageDrawable(int id, Drawable drawable)
+    public void setImageDrawable(View view, int id, Drawable drawable)
     {
 
-        View v = findViewById(id);
+        View v = view.findViewById(id);
         if (null != v && v instanceof ImageView)
         {
             ((ImageView)v).setImageDrawable(drawable);
@@ -102,10 +97,10 @@ public class LinearLayoutButton extends LinearLayout {
     }
 
     // method for setting images by resource id
-    public void setImageResource(int id, int image_resource_id)
+    public void setImageResource(View view, int id, int image_resource_id)
     {
 
-        View v = findViewById(id);
+        View v = view.findViewById(id);
         if (null != v && v instanceof ImageView)
         {
             ((ImageView)v).setImageResource(image_resource_id);
