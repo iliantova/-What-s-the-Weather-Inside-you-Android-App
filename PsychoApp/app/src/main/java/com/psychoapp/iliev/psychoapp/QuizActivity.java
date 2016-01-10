@@ -32,6 +32,7 @@ public class QuizActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+
         // set random background image for each new app load
         // add quality backgrounds in drawable and refactor the BACKGROUND_IMAGES_NUM + switch/case
 //        final ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
