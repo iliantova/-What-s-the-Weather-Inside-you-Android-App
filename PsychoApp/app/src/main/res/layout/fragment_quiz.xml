@@ -35,41 +35,49 @@
             android:id="@+id/btn_answeroption_1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
 
         <TextView android:id="@+id/tv_skip_option"
@@ -78,8 +86,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:gravity="center"
-            android:textSize="16dip"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 </ScrollView>
