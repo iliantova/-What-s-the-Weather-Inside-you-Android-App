@@ -21,4 +21,8 @@
     <string name="skip">Skip</string>
     <string name="samplequestion">Sample quiz question</string>
     <string name="btn_sample_answer">Answer option</string>
+    <string name="calendar_button_text">Calendar</string>
+    <string name="chart_button_text">Statistics</string>
+    <string name="quiz_button_text">Quiz</string>
+    <string name="last_result_button_text">Last result</string>
 </resources>

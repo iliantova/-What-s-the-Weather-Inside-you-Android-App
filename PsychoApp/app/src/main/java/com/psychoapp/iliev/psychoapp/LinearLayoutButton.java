@@ -1,6 +1,7 @@
 package com.psychoapp.iliev.psychoapp;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,14 +32,16 @@ public class LinearLayoutButton extends LinearLayout {
         //cast it to relative layout
         LinearLayout layout = (LinearLayout)v;
 
+        layout.setBackgroundResource(R.drawable.background_with_shadow);
         // copy layout parameters
+
         ViewGroup.LayoutParams params = layout.getLayoutParams();
         this.setLayoutParams(params);
 
         // here I am using temporary instance of Button class
         // to get standard button background and to get button text color
 
-
+        Button bt = new Button(context);
 
         // copy all child from relative layout to this button
         while (layout.getChildCount() > 0)
@@ -75,12 +78,14 @@ public class LinearLayoutButton extends LinearLayout {
     }
 
     // method for setting texts for the text views
-    public void setText(View view, int id, CharSequence text)
+    public void setText(View view, Context context, int id, CharSequence text)
     {
         View v = view.findViewById(id);
         if (null != v && v instanceof TextView)
         {
             ((TextView)v).setText(text);
+            Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/simonettaitalic.ttf");
+            ((TextView)v).setTypeface(face);
         }
 
     }

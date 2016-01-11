@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:layout_gravity="center"
-    android:adjustViewBounds="true">
+    android:adjustViewBounds="true"
+    android:background="@drawable/background_with_shadow">
 
     <ImageView
-        android:id="@+id/test_button_image"
+        android:id="@+id/button_image"
     android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_weight="1"
@@ -15,7 +16,7 @@
     android:src="@drawable/quiz_logo"
    />
     <TextView
-        android:id="@+id/test_button_text2"
+        android:id="@+id/button_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

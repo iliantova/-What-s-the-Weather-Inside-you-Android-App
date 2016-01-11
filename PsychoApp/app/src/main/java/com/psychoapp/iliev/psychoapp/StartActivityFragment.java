@@ -1,11 +1,14 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -20,25 +23,12 @@ public class StartActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
         Context context = getActivity();
-        LinearLayoutButton button1 = new LinearLayoutButton(view,context,R.id.button1);
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Toast.makeText(StartActivityFragment.this, "RelativeLayoutButton clicked", Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-        LinearLayoutButton button2 = new LinearLayoutButton(view, context,R.id.button2);
-
-        button2.setText(view,R.id.test_button_text2, "text");
-        button2.setImageResource(view,R.id.test_button_image, R.drawable.logo);
-
-        LinearLayoutButton button3 = new LinearLayoutButton(view, context,R.id.button3);
-
-        button3.setText(view,R.id.test_button_text2, "image");
-        button3.setImageResource(view,R.id.test_button_image, R.drawable.calendar);
+     Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/simonettaitalic.ttf");
+        ((TextView) view.findViewById(R.id.calendar_button_text)).setTypeface(face);
+        ((TextView) view.findViewById(R.id.quiz_button_text)).setTypeface(face);
+        ((TextView) view.findViewById(R.id.chart_button_text)).setTypeface(face);
+        ((TextView) view.findViewById(R.id.last_result_button_text)).setTypeface(face);
 
         return view;
     }

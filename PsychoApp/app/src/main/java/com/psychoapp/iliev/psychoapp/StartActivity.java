@@ -40,6 +40,8 @@ public class StartActivity extends AppCompatActivity {
             default: res = R.drawable.aquarell_night_400_655; break;
         }
         v.setBackgroundResource(res);
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
