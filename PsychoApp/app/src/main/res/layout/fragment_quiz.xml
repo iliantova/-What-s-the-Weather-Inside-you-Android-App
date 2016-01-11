@@ -2,24 +2,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_question_form"
     android:layout_width="fill_parent"
-    android:layout_height="500dp"
+    android:layout_height="600dp"
     android:fitsSystemWindows="true">
 
     <LinearLayout
+        android:id="@+id/ll_quiz_form"
         android:orientation="vertical"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:layout_margin="24dp"
+        android:paddingTop="24dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:layout_margin="18dp"
         android:background="@drawable/background_with_shadow"
         android:alpha="0.7">
 
         <ImageView android:src="@drawable/mostlycloudypaint"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="18dp"
             android:layout_gravity="center_horizontal" />
 
         <TextView android:id="@+id/tv_question"
@@ -34,41 +36,49 @@
             android:id="@+id/btn_answeroption_1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:padding="12dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:padding="6dp"
             android:background="@drawable/background_with_shadow"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textAllCaps="false"/>
 
 
         <TextView android:id="@+id/tv_skip_option"
@@ -77,8 +87,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:gravity="center"
-            android:textSize="16dip"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 </ScrollView>

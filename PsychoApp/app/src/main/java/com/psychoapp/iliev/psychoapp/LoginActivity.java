@@ -1,8 +1,11 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 
 import android.content.Intent;
@@ -14,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.psychoapp.iliev.psychoapp.dummy.Helpers;
+
 import java.util.Random;
 
 import butterknife.ButterKnife;
@@ -22,12 +27,13 @@ import butterknife.Bind;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    private static final int BACKGROUND_IMAGES_NUM = 8;
 
+    @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.input_email) EditText _emailText;
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_login) Button _loginButton;
     @Bind(R.id.link_signup) TextView _signupLink;
+    @Bind(R.id.link_login_google) TextView _googleLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,24 +41,27 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        // set random background image for each new app load
-        // add quality backgrounds in drawable and refactor the BACKGROUND_IMAGES_NUM + switch/case
-        ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
-        Random r = new Random();
-        int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
-        int res;
-        switch (randomInt) {
-            case 0 : res = R.drawable.c; break;
-            case 1 : res = R.drawable.d; break;
-            case 2 : res = R.drawable.e; break;
-            case 3 : res = R.drawable.f; break;
-            case 4 : res = R.drawable.g; break;
-            case 5 : res = R.drawable.h; break;
-            case 6 : res = R.drawable.j; break;
-            case 7 : res = R.drawable.aquarell_night_400_655; break;
-            default: res = R.drawable.aquarell_night_400_655; break;
-        }
-        v.setBackgroundResource(res);
+        Helpers.backgroundRandomizer(_background);
+
+        // use this for custom font importing to selected UI elements
+        // fonts are situated in assets/fonts
+        Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
+        _emailText.setTypeface(face);
+        _emailText.setTextSize(24);
+        _passwordText.setTypeface(face);
+        _passwordText.setTextSize(24);
+        _loginButton.setTypeface(face);
+        _loginButton.setTextSize(30);
+        _signupLink.setTypeface(face);
+        _signupLink.setTextSize(20);
+        _googleLink.setTypeface(face);
+        _googleLink.setTextSize(20);
+
+        _emailText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+        _passwordText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+        _loginButton.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+        _signupLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+        _googleLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -72,8 +81,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        _googleLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO - attach the google login activity
+                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                startActivityForResult(intent, REQUEST_SIGNUP);
+            }
+        });
+
         Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fade_in);
-        v.startAnimation(fadeIn);
+        _background.startAnimation(fadeIn);
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
