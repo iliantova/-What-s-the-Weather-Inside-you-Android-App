@@ -1,8 +1,11 @@
 package com.psychoapp.iliev.psychoapp;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,28 +17,42 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class QuizActivityFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
+    public static final List<String> answersList = new ArrayList<String>();
+    public static final List<String> questionsList = new ArrayList<String>();
+
+    @Bind(R.id.btn_answeroption_1) AppCompatButton _btn_option_1;
+    @Bind(R.id.btn_answeroption_2) AppCompatButton _btn_option_2;
+    @Bind(R.id.btn_answeroption_3) AppCompatButton _btn_option_3;
+    @Bind(R.id.btn_answeroption_4) AppCompatButton _btn_option_4;
+
+    @Bind(R.id.tv_question) TextView _tv_question;
+
+    @Bind(R.id.tv_skip_option) TextView _tv_skip_option;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_quiz, container, false);
-        Bundle args = getArguments();
+        final Bundle args = getArguments();
+        ButterKnife.bind(this, rootView);
 
         // use this for custom font importing to selected UI elements
         // fonts are situated in assets/fonts
         Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
 
-        ((Button) rootView.findViewById(R.id.btn_answeroption_1)).setTypeface(face);
-        ((Button) rootView.findViewById(R.id.btn_answeroption_2)).setTypeface(face);
-        ((Button) rootView.findViewById(R.id.btn_answeroption_3)).setTypeface(face);
-        ((Button) rootView.findViewById(R.id.btn_answeroption_4)).setTypeface(face);
-        ((TextView) rootView.findViewById(R.id.tv_question)).setTypeface(face);
+        _btn_option_1.setTypeface(face);
+        _btn_option_2.setTypeface(face);
+        _btn_option_3.setTypeface(face);
+        _btn_option_4.setTypeface(face);
+        _tv_question.setTypeface(face);
 
-        List<String> answersList = new ArrayList<String>();
-
+        // 40 hardcored answers (4 x 10)
         answersList.add("Apple");
         answersList.add("Banana");
         answersList.add("Orange");
@@ -86,18 +103,7 @@ public class QuizActivityFragment extends Fragment {
         answersList.add("Orange");
         answersList.add("Blue");
 
-        answersList.add("Those who seeks are those who finds!");
-        answersList.add("Second best is as good as last option");
-        answersList.add("Work is oveerrated");
-        answersList.add("Casual is boring");
-
-        answersList.add("5");
-        answersList.add("25");
-        answersList.add("120");
-        answersList.add("0.5");
-
-
-        List<String> questionsList = new ArrayList<String>();
+        // 10 hardcored questions test
         questionsList.add("Which one is your favorite!?");
         questionsList.add("Which one is your least favorite?");
         questionsList.add("Which statements is your favorite?");
@@ -109,12 +115,26 @@ public class QuizActivityFragment extends Fragment {
         questionsList.add("Which one is your favorite!?");
         questionsList.add("Which one is your least favorite?");
 
-        ((TextView) rootView.findViewById(R.id.tv_question)).setText(questionsList.get(args.getInt(ARG_OBJECT) - 1));
+        _tv_question.setText(questionsList.get(args.getInt(ARG_OBJECT) - 1));
 
-        ((Button) rootView.findViewById(R.id.btn_answeroption_1)).setText(answersList.get((args.getInt(ARG_OBJECT) * 4 )- 4));
-        ((Button) rootView.findViewById(R.id.btn_answeroption_2)).setText(answersList.get((args.getInt(ARG_OBJECT) * 4 )- 3));
-        ((Button) rootView.findViewById(R.id.btn_answeroption_3)).setText(answersList.get((args.getInt(ARG_OBJECT) * 4 )- 2));
-        ((Button) rootView.findViewById(R.id.btn_answeroption_4)).setText(answersList.get((args.getInt(ARG_OBJECT) * 4 )- 1));
+        _btn_option_1.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 4));
+        _btn_option_2.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 3));
+        _btn_option_3.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 2));
+        _btn_option_4.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 1));
+
+        View.OnClickListener changeFrag = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QuizActivity activity = (QuizActivity) getActivity();
+                activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
+            }
+        };
+
+        _btn_option_1.setOnClickListener(changeFrag);
+        _btn_option_2.setOnClickListener(changeFrag);
+        _btn_option_3.setOnClickListener(changeFrag);
+        _btn_option_4.setOnClickListener(changeFrag);
+        _tv_skip_option.setOnClickListener(changeFrag);
 
         return rootView;
     }

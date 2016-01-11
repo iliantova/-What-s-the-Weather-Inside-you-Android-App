@@ -41,6 +41,7 @@ public class QuizActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
         ButterKnife.bind(this);
 
         Helpers.backgroundRandomizer(_background);
@@ -68,6 +69,7 @@ public class QuizActivity extends FragmentActivity {
             Bundle args = new Bundle();
             args.putInt(QuizActivityFragment.ARG_OBJECT, i + 1); // Our object is just an integer :-P
             fragment.setArguments(args);
+
             return fragment;
         }
 
@@ -79,7 +81,7 @@ public class QuizActivity extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Qustion #" + (position + 1);
+            return "Question #" + (position + 1);
         }
     }
 }
