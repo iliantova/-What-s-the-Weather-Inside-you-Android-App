@@ -2,6 +2,7 @@ package com.psychoapp.iliev.psychoapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,6 +39,20 @@ public class SignupActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Helpers.backgroundRandomizer(_background);
+
+        Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
+        _nameText.setTypeface(face);
+        _nameText.setTextSize(24);
+        _emailText.setTypeface(face);
+        _emailText.setTextSize(24);
+        _passwordText.setTypeface(face);
+        _passwordText.setTextSize(24);
+        _signupButton.setTypeface(face);
+        _signupButton.setTextSize(30);
+        _loginLink.setTypeface(face);
+        _loginLink.setTextSize(20);
+        _loginAnonLink.setTypeface(face);
+        _loginAnonLink.setTextSize(20);
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,25 +2,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_question_form"
     android:layout_width="fill_parent"
-    android:layout_height="500dp"
+    android:layout_height="600dp"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/ll_quiz_form"
         android:orientation="vertical"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:layout_margin="24dp"
+        android:paddingTop="24dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:layout_margin="18dp"
         android:background="@drawable/background_with_shadow"
         android:alpha="0.7">
 
         <ImageView android:src="@drawable/mostlycloudypaint"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="18dp"
             android:layout_gravity="center_horizontal" />
 
         <TextView android:id="@+id/tv_question"

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 
 import android.content.Intent;
@@ -45,10 +47,15 @@ public class LoginActivity extends AppCompatActivity {
         // fonts are situated in assets/fonts
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _emailText.setTypeface(face);
+        _emailText.setTextSize(24);
         _passwordText.setTypeface(face);
+        _passwordText.setTextSize(24);
         _loginButton.setTypeface(face);
+        _loginButton.setTextSize(30);
         _signupLink.setTypeface(face);
+        _signupLink.setTextSize(20);
         _googleLink.setTypeface(face);
+        _googleLink.setTextSize(20);
 
         _emailText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _passwordText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);

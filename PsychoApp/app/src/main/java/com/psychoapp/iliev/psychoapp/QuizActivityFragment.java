@@ -1,6 +1,7 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,7 +40,7 @@ public class QuizActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_quiz, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_quiz, container, false);
         final Bundle args = getArguments();
         ButterKnife.bind(this, rootView);
 
@@ -122,11 +124,78 @@ public class QuizActivityFragment extends Fragment {
         _btn_option_3.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 2));
         _btn_option_4.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 1));
 
+        // I am using this so i can track which drawable resource is set on the onClickEvent
+        _btn_option_1.setTag(R.drawable.background_with_shadow);
+        _btn_option_2.setTag(R.drawable.background_with_shadow);
+        _btn_option_3.setTag(R.drawable.background_with_shadow);
+        _btn_option_4.setTag(R.drawable.background_with_shadow);
+
         View.OnClickListener changeFrag = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QuizActivity activity = (QuizActivity) getActivity();
-                activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
+                int currentId = v.getId();
+                // First we check if the user haven't clicked on the LAST 10th question
+                if (args.getInt(ARG_OBJECT) != 10) {
+                    if (((Integer) v.getTag()).intValue() == R.drawable.background_with_shadow) {
+                        v.setBackgroundResource(R.drawable.background_with_shadow_lighter);
+                        v.setTag(R.drawable.background_with_shadow_lighter);
+
+                        // reset the old selected button option wiht the default style
+                        // TODO here we should change the result in our DB as well
+                        if (currentId != _btn_option_1.getId() &&
+                                ((Integer) _btn_option_1.getTag()).intValue() != R.drawable.background_with_shadow) {
+                            _btn_option_1.setBackgroundResource(R.drawable.background_with_shadow);
+                            _btn_option_1.setTag(R.drawable.background_with_shadow);
+                        }
+                        if (currentId != _btn_option_2.getId() &&
+                                ((Integer) _btn_option_2.getTag()).intValue() != R.drawable.background_with_shadow) {
+                            _btn_option_2.setBackgroundResource(R.drawable.background_with_shadow);
+                            _btn_option_2.setTag(R.drawable.background_with_shadow);
+                        }
+                        if (currentId != _btn_option_3.getId() &&
+                                ((Integer) _btn_option_3.getTag()).intValue() != R.drawable.background_with_shadow) {
+                            _btn_option_3.setBackgroundResource(R.drawable.background_with_shadow);
+                            _btn_option_3.setTag(R.drawable.background_with_shadow);
+                        }
+                        if (currentId != _btn_option_4.getId() &&
+                                ((Integer) _btn_option_4.getTag()).intValue() != R.drawable.background_with_shadow) {
+                            _btn_option_4.setBackgroundResource(R.drawable.background_with_shadow);
+                            _btn_option_4.setTag(R.drawable.background_with_shadow);
+                        }
+
+                    }
+                    else {
+                        v.setBackgroundResource(R.drawable.background_with_shadow);
+                        v.setTag(R.drawable.background_with_shadow);
+                    }
+
+                    // THIS is the code that actually change the current fragment with the next qustion fragment
+                    // _viewPager is the container element (in the activity) in which the new fragment is loaded
+                    QuizActivity activity = (QuizActivity) getActivity();
+                    activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
+                }
+                // TODO: CHANGE THIS WHEN ResultActivity is rewady
+                // the LAST 10th question redirects to Result Activity
+                else {
+                    // TODO - change to ResultActivity later
+                    Intent intent = new Intent(getActivity(), SignupActivity.class);
+                    startActivity(intent);
+                }
+            }
+        };
+
+        View.OnClickListener skipFrag = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (args.getInt(ARG_OBJECT) != 10) {
+                    QuizActivity activity = (QuizActivity) getActivity();
+                    activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
+                }
+                else {
+                    // TODO - change to ResultActivity later
+                    Intent intent = new Intent(getActivity(), SignupActivity.class);
+                    startActivity(intent);
+                }
             }
         };
 
@@ -134,8 +203,10 @@ public class QuizActivityFragment extends Fragment {
         _btn_option_2.setOnClickListener(changeFrag);
         _btn_option_3.setOnClickListener(changeFrag);
         _btn_option_4.setOnClickListener(changeFrag);
-        _tv_skip_option.setOnClickListener(changeFrag);
+        _tv_skip_option.setOnClickListener(skipFrag);
 
         return rootView;
+
+
     }
 }
