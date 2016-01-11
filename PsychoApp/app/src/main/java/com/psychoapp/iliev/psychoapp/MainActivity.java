@@ -25,43 +25,33 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.psychoapp.iliev.psychoapp.dummy.Helpers;
+
 import java.util.Random;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int BACKGROUND_IMAGES_NUM = 8;
+    @Bind(R.id.background_image) ProportionalImageView _background;
+    @Bind(R.id.action_login) Button _btn_login;
+    @Bind(R.id.action_quiz) Button _btn_quiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        Helpers.backgroundRandomizer(_background);
 
         // use this for custom font importing to selected UI elements
-        // fonts are situated in assets/fonts
-        Button loginButton = (Button) findViewById(R.id.action_login);
-        Button signupButton = (Button) findViewById(R.id.action_quiz);
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
-        loginButton.setTypeface(face);
-        signupButton.setTypeface(face);
-
-        // set random background image for each new app load
-        // add quality backgrounds in drawable and refactor the BACKGROUND_IMAGES_NUM + switch/case
-        final ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
-        Random r = new Random();
-        int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
-        int res;
-        switch (randomInt) {
-            case 0 : res = R.drawable.c; break;
-            case 1 : res = R.drawable.d; break;
-            case 2 : res = R.drawable.e; break;
-            case 3 : res = R.drawable.f; break;
-            case 4 : res = R.drawable.g; break;
-            case 5 : res = R.drawable.h; break;
-            case 6 : res = R.drawable.j; break;
-            case 7 : res = R.drawable.aquarell_night_400_655; break;
-            default: res = R.drawable.aquarell_night_400_655; break;
-        }
-        v.setBackgroundResource(res);
+        _btn_login.setTypeface(face);
+        _btn_quiz.setTypeface(face);
+        _btn_login.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+        _btn_quiz.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
 
         /*//the bottom floating menu
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,13 +63,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        // set onClickListeners for the buttons
-        loginButton.setOnClickListener(mButtonsListener);
-        signupButton.setOnClickListener(mButtonsListener);
-
         // fade in animation for background image (can use fadeout as well)
         Animation fadeIn = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
-        v.startAnimation(fadeIn);
+        _background.startAnimation(fadeIn);
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -93,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationRepeat(Animation animation) {
             }
         });
+
+        // set onClickListeners for the buttons
+        _btn_login.setOnClickListener(mButtonsListener);
+        _btn_quiz.setOnClickListener(mButtonsListener);
+
     }
 
 
@@ -107,15 +98,15 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_login:
 
                     // do something when the action_login is clicked
-                    Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                    startActivity(intent);
+                    Intent newLoginIntent = new Intent(v.getContext(), LoginActivity.class);
+                    startActivity(newLoginIntent);
 
                     break;
                 case R.id.action_quiz:
 
                     // do something when the action_quiz is clicked
-                    Intent intent2 = new Intent(v.getContext(), StartActivity.class);
-                    startActivity(intent2);
+                    Intent newQuizIntent = new Intent(v.getContext(), QuizActivity.class);
+                    startActivity(newQuizIntent);
                     break;
                 default:
                     break;

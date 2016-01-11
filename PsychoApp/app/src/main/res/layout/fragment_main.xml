@@ -18,7 +18,8 @@
            android:background="@android:color/transparent"
            android:textColor="@color/white"
            android:textSize="18sp"
-           android:onClick="navigateToFragment"/>
+           android:onClick="navigateToFragment"
+           android:layout_marginRight="12sp"/>
        <Button
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -26,8 +27,7 @@
            android:text="@string/action_quiz"
            android:background="@android:color/transparent"
            android:textColor="@color/white"
-           android:textSize="18sp"
-           android:layout_gravity="right"/>
+           android:textSize="18sp"/>
    </LinearLayout>
 
    <ImageView
