@@ -25,4 +25,6 @@
     <string name="chart_button_text">Statistics</string>
     <string name="quiz_button_text">Quiz</string>
     <string name="last_result_button_text">Last result</string>
+    <string name="result_text">Lorem ipsumrbi diam sapien, commodo accumsan vestibulum sit amet, finibus quis nisl. Aenean aliquam augue velit, quis semper diam porttitor eget. Cras malesuada ex sed ex elementum, vitae consequat velit lacinia. Nam ut sem urna. Aliquam vel felis sit amet nulla ultrices vehicula. Nullam pellentesque nisi vel eleifend dapibus</string>
+    <string name="result_title_text">Title finibus finibus</string>
 </resources>
