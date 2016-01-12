@@ -3,6 +3,9 @@ package com.psychoapp.iliev.psychoapp;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,14 +14,24 @@ import android.view.View;
 
 import java.util.Random;
 
-public class StartActivity extends AppCompatActivity {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class StartActivity extends AppCompatActivity implements FragmentChangeListener {
 
     private final int BACKGROUND_IMAGES_NUM = 8;
+    private static final String DETAILFRAGMENT_TAG = "DFTAG";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        ButterKnife.bind(this);
+
+        StartActivityFragment firstFragment = new StartActivityFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_start_conteiner, firstFragment).commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,4 +78,12 @@ public class StartActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();;
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_start_conteiner, fragment,DETAILFRAGMENT_TAG);
+        fragmentTransaction.addToBackStack(fragment.toString());
+        fragmentTransaction.commit();
+    }
 }

@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_quiz:
 
                     // do something when the action_quiz is clicked
-                    Intent newQuizIntent = new Intent(v.getContext(), QuizActivity.class);
+                    Intent newQuizIntent = new Intent(v.getContext(), StartActivity.class);
                     startActivity(newQuizIntent);
                     break;
                 default:

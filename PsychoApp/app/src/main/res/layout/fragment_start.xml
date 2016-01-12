@@ -6,8 +6,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.psychoapp.iliev.psychoapp.StartActivityFragment"
-    tools:showIn="@layout/activity_start"
     android:adjustViewBounds="true">
 
     <LinearLayout
@@ -32,8 +30,7 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:layout_margin="5dp"
-            android:background="@drawable/background_with_shadow"
-            android:onClick="calendar_button_onclick">
+            android:background="@drawable/background_with_shadow">
 
             <ImageView
                 android:id="@+id/calendar_button_image"
@@ -63,8 +60,7 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:layout_margin="5dp"
-            android:background="@drawable/background_with_shadow"
-            android:onClick="chart_button_onclick">
+            android:background="@drawable/background_with_shadow">
 
             <ImageView
                 android:id="@+id/chart_button_image"
