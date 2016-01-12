@@ -12,17 +12,17 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="614dp"
+        android:layout_height="560dp"
         android:fitsSystemWindows="true">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="56dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:layout_margin="24dp"
+            android:paddingTop="36dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_margin="12dp"
             android:background="@drawable/background_with_shadow"
             android:alpha="0.7">
 
