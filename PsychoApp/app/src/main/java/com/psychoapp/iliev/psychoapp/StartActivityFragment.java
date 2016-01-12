@@ -67,17 +67,15 @@ public class StartActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int curentId = v.getId();
-                if (curentId == _quizButton.getId()) {
+                if (curentId == _calendarButton.getId()) {
                     Toast.makeText(getContext(),
                             "This is a message displayed in a Toast",
                             Toast.LENGTH_SHORT).show();
-                    showOtherFragment();
                 }
-                else if (curentId == _calendarButton.getId()){
-                    Toast.makeText(getContext(),
-                            "_quizButton",
-                            Toast.LENGTH_SHORT).show();
-                    showOtherFragment();
+                else if (curentId == _quizButton.getId()){
+                    Intent intent = new Intent(getActivity(), QuizActivity.class);
+                    startActivity(intent);
+
                 }
                 else if (curentId == _chartButton.getId()){
                     Toast.makeText(getContext(),
@@ -88,6 +86,7 @@ public class StartActivityFragment extends Fragment {
                     Toast.makeText(getContext(),
                             "_lastResultButton",
                             Toast.LENGTH_SHORT).show();
+                    showOtherFragment();
                 }
             }
         };
