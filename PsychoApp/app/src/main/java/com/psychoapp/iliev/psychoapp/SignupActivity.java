@@ -42,13 +42,13 @@ public class SignupActivity extends AppCompatActivity {
 
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _nameText.setTypeface(face);
-        _nameText.setTextSize(24);
+        _nameText.setTextSize(20);
         _emailText.setTypeface(face);
-        _emailText.setTextSize(24);
+        _emailText.setTextSize(20);
         _passwordText.setTypeface(face);
-        _passwordText.setTextSize(24);
+        _passwordText.setTextSize(20);
         _signupButton.setTypeface(face);
-        _signupButton.setTextSize(30);
+        _signupButton.setTextSize(24);
         _loginLink.setTypeface(face);
         _loginLink.setTextSize(20);
         _loginAnonLink.setTypeface(face);

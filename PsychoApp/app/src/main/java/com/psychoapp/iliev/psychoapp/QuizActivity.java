@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +32,8 @@ import butterknife.ButterKnife;
 
 public class QuizActivity extends FragmentActivity {
 
-    ViewPager mViewPager;
     QuizQuestionsPagerAdapter mQuizQuestionsPagerAdapter;
+    private static final String RESULTFRAGMENT_TAG = "RSTAG";
 
     @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.pager) ViewPager _viewPager;
@@ -84,4 +85,5 @@ public class QuizActivity extends FragmentActivity {
             return "Question #" + (position + 1);
         }
     }
+
 }

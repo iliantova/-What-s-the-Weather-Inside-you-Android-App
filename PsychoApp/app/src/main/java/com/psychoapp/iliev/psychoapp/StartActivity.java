@@ -1,5 +1,6 @@
 package com.psychoapp.iliev.psychoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,15 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        String fragmentName = intent.getStringExtra("fragment");
+        String frag = "fragment_result";
+        if (fragmentName != null && fragmentName.equals(frag)) {
+            ResultFragment firstFragment = new ResultFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_start_conteiner, firstFragment).commit();
+        }
 
         StartActivityFragment firstFragment = new StartActivityFragment();
         getSupportFragmentManager().beginTransaction()

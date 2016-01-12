@@ -47,11 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         // fonts are situated in assets/fonts
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _emailText.setTypeface(face);
-        _emailText.setTextSize(24);
+        _emailText.setTextSize(20);
         _passwordText.setTypeface(face);
-        _passwordText.setTextSize(24);
+        _passwordText.setTextSize(20);
         _loginButton.setTypeface(face);
-        _loginButton.setTextSize(30);
+        _loginButton.setTextSize(24);
         _signupLink.setTypeface(face);
         _signupLink.setTextSize(20);
         _googleLink.setTypeface(face);

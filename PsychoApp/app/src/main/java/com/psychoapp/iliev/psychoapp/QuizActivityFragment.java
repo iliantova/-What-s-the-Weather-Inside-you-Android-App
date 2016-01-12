@@ -173,12 +173,10 @@ public class QuizActivityFragment extends Fragment {
                     // _viewPager is the container element (in the activity) in which the new fragment is loaded
                     QuizActivity activity = (QuizActivity) getActivity();
                     activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
-                }
-                // TODO: CHANGE THIS WHEN ResultActivity is rewady
-                // the LAST 10th question redirects to Result Activity
-                else {
-                    // TODO - change to ResultActivity later
-                    Intent intent = new Intent(getActivity(), SignupActivity.class);
+                } else {
+                    Intent intent = new Intent(getActivity(), StartActivity.class);
+                    String frag = "fragment_result";
+                    intent.putExtra("fragment", frag);
                     startActivity(intent);
                 }
             }
@@ -190,10 +188,10 @@ public class QuizActivityFragment extends Fragment {
                 if (args.getInt(ARG_OBJECT) != 10) {
                     QuizActivity activity = (QuizActivity) getActivity();
                     activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
-                }
-                else {
-                    // TODO - change to ResultActivity later
-                    Intent intent = new Intent(getActivity(), SignupActivity.class);
+                } else {
+                    Intent intent = new Intent(getActivity(), StartActivity.class);
+                    String frag = "fragment_result";
+                    intent.putExtra("fragment", frag);
                     startActivity(intent);
                 }
             }
@@ -206,7 +204,5 @@ public class QuizActivityFragment extends Fragment {
         _tv_skip_option.setOnClickListener(skipFrag);
 
         return rootView;
-
-
     }
 }
