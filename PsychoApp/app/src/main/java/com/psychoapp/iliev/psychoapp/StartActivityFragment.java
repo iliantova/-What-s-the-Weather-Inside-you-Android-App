@@ -93,6 +93,9 @@ public class StartActivityFragment extends Fragment {
         };
 
         _calendarButton.setOnClickListener(skipFrag);
+        _quizButton.setOnClickListener(skipFrag);
+        _chartButton.setOnClickListener(skipFrag);
+        _lastResultButton.setOnClickListener(skipFrag);
 
         return view;
     }
