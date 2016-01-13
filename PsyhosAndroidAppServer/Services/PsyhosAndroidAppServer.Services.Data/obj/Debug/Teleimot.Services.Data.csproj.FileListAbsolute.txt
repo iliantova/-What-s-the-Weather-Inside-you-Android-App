@@ -1,2 +1,0 @@
-D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\Services\Teleimot.Services.Data\obj\Debug\Teleimot.Services.Data.csprojResolveAssemblyReference.cache
-D:\Web-Services-and-Cloud-master\Web-Services-and-Cloud-master\Exams\2015-Real-Estates\Solution\Services\PsyhosAndroidAppServer.Services.Data\obj\Debug\Teleimot.Services.Data.csprojResolveAssemblyReference.cache
