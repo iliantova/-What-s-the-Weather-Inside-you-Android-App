@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import java.util.Random;
 
@@ -23,6 +24,7 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
     private final int BACKGROUND_IMAGES_NUM = 8;
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
+    @Bind(R.id.fragment_start_conteiner) LinearLayout _ll_frag_start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

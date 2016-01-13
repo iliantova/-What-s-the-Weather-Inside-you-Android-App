@@ -2,25 +2,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_question_form"
     android:layout_width="fill_parent"
-    android:layout_height="600dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/ll_quiz_form"
         android:orientation="vertical"
-        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:layout_margin="18dp"
+        android:paddingTop="18dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_margin="24dp"
+        android:layout_gravity="center"
         android:background="@drawable/background_with_shadow"
         android:alpha="0.7">
 
         <ImageView android:src="@drawable/mostlycloudypaint"
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_height="52dp"
             android:layout_marginBottom="18dp"
             android:layout_gravity="center_horizontal" />
 
@@ -29,67 +30,101 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:textSize="36dp"
+            android:textSize="26dp"
             android:textColor="@color/white" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"
-            android:padding="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:padding="4dp"
             android:background="@drawable/background_with_shadow"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"
-            android:padding="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:padding="4dp"
             android:background="@drawable/background_with_shadow"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"
-            android:padding="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:padding="4dp"
             android:background="@drawable/background_with_shadow"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textAllCaps="false"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_answeroption_4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"
-            android:padding="6dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:padding="4dp"
             android:background="@drawable/background_with_shadow"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textAllCaps="false"/>
 
-
-        <TextView android:id="@+id/tv_skip_option"
-            android:text="@string/skip"
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textAllCaps="false"/>
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="12dp">
+
+            <TextView android:id="@+id/tv_previous_option"
+                android:text="@string/previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <TextView android:id="@+id/tv_skip_option"
+                android:text="@string/skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <TextView android:id="@+id/tv_next_option"
+                android:text="@string/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+        </RelativeLayout>
 
     </LinearLayout>
 </ScrollView>
