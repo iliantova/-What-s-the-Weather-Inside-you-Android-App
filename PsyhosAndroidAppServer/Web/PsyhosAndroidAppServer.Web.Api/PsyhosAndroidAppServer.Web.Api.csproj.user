@@ -4,6 +4,12 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
+<PropertyGroup>  
+  <PostBuildEvent>  
+      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"  
+      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"  
+  </PostBuildEvent>  
+</PropertyGroup> 
           <StartPageUrl>
           </StartPageUrl>
           <StartAction>CurrentPage</StartAction>
