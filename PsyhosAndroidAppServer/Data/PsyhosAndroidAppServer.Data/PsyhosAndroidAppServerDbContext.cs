@@ -7,7 +7,7 @@
     public class PsyhosAndroidAppServerDbContext : IdentityDbContext<User>, IPsyhosAndroidAppServerDbContext
     {
         public PsyhosAndroidAppServerDbContext()
-            : base("SQLSERVER_CONNECTION_STRING", throwIfV1Schema: false)
+            : base("DefautConections", throwIfV1Schema: false)
         {
         }
         
