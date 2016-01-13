@@ -19,8 +19,8 @@
 
         public virtual void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<RealEstate, RealEstateDetailsResponseModel>()
-                .ForMember(m => m.RealEstateType, opts => opts.MapFrom(r => r.Type.ToString()));
+            //configuration.CreateMap<Question, RealEstateDetailsResponseModel>()
+            //    .ForMember(m => m.RealEstateType, opts => opts.MapFrom(r => r.Type.ToString()));
         }
     }
 }

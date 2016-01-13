@@ -15,9 +15,9 @@
     [Authorize]
     public class CommentsController : ApiController
     {
-        private readonly ICommentsService comments;
+        private readonly IResultService comments;
 
-        public CommentsController(ICommentsService comments)
+        public CommentsController(IResultService comments)
         {
             this.comments = comments;
         }
@@ -25,8 +25,8 @@
         [ValidateTake]
         public IHttpActionResult Get(
             int id,
-            int skip = CommentConstants.DefaultCommentSkip,
-            int take = CommentConstants.DefaultCommentTake)
+            int skip =1,
+            int take = 2)
         {
             var result = this.comments
                 .GetAllByRealEstate(id, skip, take)
@@ -39,7 +39,7 @@
         [ValidateModel]
         public IHttpActionResult Post(CommentRequestModel model)
         {
-            var newComment = Mapper.Map<Comment>(model);
+            var newComment = Mapper.Map<Result>(model);
             var id = this.comments.AddNew(newComment, this.User.Identity.GetUserId());
 
             var result = this.comments
@@ -55,8 +55,8 @@
         [ValidateTake]
         public IHttpActionResult ByUser(
             [Required]string id,
-            int skip = CommentConstants.DefaultCommentSkip,
-            int take = CommentConstants.DefaultCommentTake)
+            int skip = 1,
+            int take =2)
         {
             var result = this.comments
                 .GetAllByUser(id, skip, take)

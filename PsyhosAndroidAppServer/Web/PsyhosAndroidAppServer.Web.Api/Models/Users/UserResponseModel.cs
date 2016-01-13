@@ -17,10 +17,10 @@
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<User, UserResponseModel>()
-                .ForMember(u => u.RealEstates, opts => opts.MapFrom(u => u.RealEstates.Count))
-                .ForMember(u => u.Comments, opts => opts.MapFrom(u => u.Comments.Count))
-                .ForMember(u => u.Rating, opts => opts.MapFrom(u => u.Ratings.Average(r => r.Value)));
+            //configuration.CreateMap<User, UserResponseModel>()
+            //    .ForMember(u => u.RealEstates, opts => opts.MapFrom(u => u.RealEstates.Count))
+            //    .ForMember(u => u.Comments, opts => opts.MapFrom(u => u.Comments.Count))
+            //    .ForMember(u => u.Rating, opts => opts.MapFrom(u => u.Ratings.Average(r => r.Value)));
         }
     }
 }

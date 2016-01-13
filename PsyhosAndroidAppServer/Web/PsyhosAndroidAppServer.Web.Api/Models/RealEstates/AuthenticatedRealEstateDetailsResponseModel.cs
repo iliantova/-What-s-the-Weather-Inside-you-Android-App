@@ -17,8 +17,8 @@
         {
             base.CreateMappings(configuration);
 
-            configuration.CreateMap<RealEstate, AuthenticatedRealEstateDetailsResponseModel>()
-                .ForMember(r => r.Comments, opts => opts.MapFrom(r => r.Comments.OrderBy(c => c.CreatedOn).Take(CommentConstants.DefaultCommentTake)));
+            //configuration.CreateMap<Question, AuthenticatedRealEstateDetailsResponseModel>()
+            //    .ForMember(r => r.Comments, opts => opts.MapFrom(r => r..OrderBy(c => c.id).Take(2)));
         }
     }
 }

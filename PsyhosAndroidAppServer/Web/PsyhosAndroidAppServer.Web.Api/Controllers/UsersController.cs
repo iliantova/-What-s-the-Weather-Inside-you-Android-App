@@ -41,8 +41,8 @@
                 return this.BadRequest("You cannot give rating to yourself!");
             }
 
-            var rating = Mapper.Map<Rating>(model);
-            this.users.Rate(rating);
+            var rating = Mapper.Map<Result>(model);
+            //this.users.Rate(rating);
             return this.Ok();
         }
     }

@@ -6,16 +6,16 @@
     using Data.Models;
     using Infrastructure.Mappings;
 
-    public class RealEstateRequestModel : IMapFrom<RealEstate>, IValidatableObject
+    public class RealEstateRequestModel : IMapFrom<Question>, IValidatableObject
     {
         [Required]
-        [MinLength(RealEstateConstants.TitleMinLength)]
-        [MaxLength(RealEstateConstants.TitleMaxLength)]
+        [MinLength(1)]
+        [MaxLength(1)]
         public string Title { get; set; }
 
         [Required]
-        [MinLength(RealEstateConstants.DescriptionMinLength)]
-        [MaxLength(RealEstateConstants.DescriptionMaxLength)]
+        [MinLength(1)]
+        [MaxLength(1)]
         public string Description { get; set; }
 
         [Required]
@@ -23,14 +23,9 @@
 
         public string Contact { get; set; }
 
-        [Range(RealEstateConstants.MinConstructionYear, int.MaxValue)]
-        public int ConstructionYear { get; set; }
-
         public decimal? SellingPrice { get; set; }
 
         public decimal? RentingPrice { get; set; }
-
-        public RealEstateType Type { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

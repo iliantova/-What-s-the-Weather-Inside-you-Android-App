@@ -5,7 +5,7 @@
     using Data.Models;
     using Infrastructure.Mappings;
 
-    public class CommentResponseModel : IMapFrom<Comment>, IHaveCustomMappings
+    public class CommentResponseModel : IMapFrom<Result>, IHaveCustomMappings
     {
         public string Content { get; set; }
 
@@ -15,8 +15,8 @@
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<Comment, CommentResponseModel>()
-                .ForMember(c => c.UserName, opts => opts.MapFrom(c => c.User.UserName));
+            configuration.CreateMap<Result, CommentResponseModel>()
+                .ForMember(c => c.UserName, opts => opts.MapFrom(c => c.Id));
         }
     }
 }
