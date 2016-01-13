@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -36,6 +37,8 @@ public class QuizActivityFragment extends Fragment {
     @Bind(R.id.tv_question) TextView _tv_question;
 
     @Bind(R.id.tv_skip_option) TextView _tv_skip_option;
+    @Bind(R.id.tv_previous_option) TextView _tv_previous_option;
+    @Bind(R.id.tv_next_option) TextView _tv_next_option;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +56,10 @@ public class QuizActivityFragment extends Fragment {
         _btn_option_3.setTypeface(face);
         _btn_option_4.setTypeface(face);
         _tv_question.setTypeface(face);
+
+        _tv_skip_option.setTypeface(face);
+        _tv_previous_option.setTypeface(face);
+        _tv_next_option.setTypeface(face);
 
         // 40 hardcored answers (4 x 10)
         answersList.add("Apple");
@@ -185,14 +192,35 @@ public class QuizActivityFragment extends Fragment {
         View.OnClickListener skipFrag = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (args.getInt(ARG_OBJECT) != 10) {
-                    QuizActivity activity = (QuizActivity) getActivity();
-                    activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
+                int currentId = v.getId();
+                if (currentId == _tv_skip_option.getId()) {
+                    if (args.getInt(ARG_OBJECT) != 10) {
+                        QuizActivity activity = (QuizActivity) getActivity();
+                        activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
+                    } else {
+                        Intent intent = new Intent(getActivity(), StartActivity.class);
+                        String frag = "fragment_result";
+                        intent.putExtra("fragment", frag);
+                        startActivity(intent);
+                    }
+                } else if (currentId == _tv_next_option.getId()) {
+                    if (args.getInt(ARG_OBJECT) != 10) {
+                        QuizActivity activity = (QuizActivity) getActivity();
+                        activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
+                    } else {
+                        Intent intent = new Intent(getActivity(), StartActivity.class);
+                        String frag = "fragment_result";
+                        intent.putExtra("fragment", frag);
+                        startActivity(intent);
+                    }
                 } else {
-                    Intent intent = new Intent(getActivity(), StartActivity.class);
-                    String frag = "fragment_result";
-                    intent.putExtra("fragment", frag);
-                    startActivity(intent);
+                    if (args.getInt(ARG_OBJECT) != 1) {
+                        QuizActivity activity = (QuizActivity) getActivity();
+                        activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT) - 1, true);
+                    } else {
+                        Intent intent = new Intent(getActivity(), StartActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         };
@@ -201,7 +229,10 @@ public class QuizActivityFragment extends Fragment {
         _btn_option_2.setOnClickListener(changeFrag);
         _btn_option_3.setOnClickListener(changeFrag);
         _btn_option_4.setOnClickListener(changeFrag);
+
         _tv_skip_option.setOnClickListener(skipFrag);
+        _tv_next_option.setOnClickListener(skipFrag);
+        _tv_previous_option.setOnClickListener(skipFrag);
 
         return rootView;
     }

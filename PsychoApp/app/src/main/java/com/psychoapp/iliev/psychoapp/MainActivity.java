@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.action_login) Button _btn_login;
     @Bind(R.id.action_quiz) Button _btn_quiz;
+    @Bind(R.id.action_camera) Button _btn_camera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +51,10 @@ public class MainActivity extends AppCompatActivity {
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _btn_login.setTypeface(face);
         _btn_quiz.setTypeface(face);
+        _btn_camera.setTypeface(face);
         _btn_login.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _btn_quiz.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
-
-        /*//the bottom floating menu
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        _btn_camera.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
 
         // fade in animation for background image (can use fadeout as well)
         Animation fadeIn = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
@@ -80,33 +73,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // set onClickListeners for the buttons
         _btn_login.setOnClickListener(mButtonsListener);
         _btn_quiz.setOnClickListener(mButtonsListener);
+        _btn_camera.setOnClickListener(mButtonsListener);
 
     }
 
-
-    // Create an anonymous implementation of OnClickListener
     private View.OnClickListener mButtonsListener = new View.OnClickListener() {
         public void onClick(View v) {
-            // do something when the button is clicked
-            // Yes we will handle click here but which button clicked??? We don't know
-
-            // So we will make
-            switch (v.getId() /*to get clicked view id**/) {
+            switch (v.getId()) {
                 case R.id.action_login:
-
-                    // do something when the action_login is clicked
                     Intent newLoginIntent = new Intent(v.getContext(), LoginActivity.class);
                     startActivity(newLoginIntent);
-
                     break;
                 case R.id.action_quiz:
-
-                    // do something when the action_quiz is clicked
                     Intent newQuizIntent = new Intent(v.getContext(), StartActivity.class);
                     startActivity(newQuizIntent);
+                    break;
+                case R.id.action_camera:
+                    Intent newCameraIntent = new Intent(v.getContext(), CameraActivity.class);
+                    startActivity(newCameraIntent);
                     break;
                 default:
                     break;
