@@ -3,7 +3,7 @@
     using Data.Models;
     using Infrastructure.Mappings;
 
-    public class ListedRealEstateResponseModel : IMapFrom<RealEstate>
+    public class ListedRealEstateResponseModel : IMapFrom<Question>
     {
         public int Id { get; set; }
 

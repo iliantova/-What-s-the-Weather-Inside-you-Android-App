@@ -5,13 +5,13 @@
     using Data.Models;
     using Infrastructure.Mappings;
 
-    public class CommentRequestModel: IMapFrom<Comment>
+    public class CommentRequestModel: IMapFrom<Question>
     {
         public int RealEstateId { get; set; }
         
         [Required]
-        [MinLength(CommentConstants.ContentMinLength)]
-        [MaxLength(CommentConstants.ContentMaxLength)]
+        [MinLength(1)]
+        [MaxLength(2)]
         public string Content { get; set; }
     }
 }

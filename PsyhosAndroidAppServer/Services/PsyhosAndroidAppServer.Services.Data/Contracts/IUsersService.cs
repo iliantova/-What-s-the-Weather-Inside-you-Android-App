@@ -7,6 +7,6 @@
     {
         IQueryable<User> GetByUserName(string username);
 
-        void Rate(Rating rating);
+      
     }
 }

@@ -3,12 +3,12 @@
     using System.Linq;
     using PsyhosAndroidAppServer.Data.Models;
 
-    public interface IRealEstatesService
+    public interface IQuestionService
     {
-        IQueryable<RealEstate> GetAll(int skip, int take);
+        IQueryable<Question> GetAll(int skip, int take);
 
-        IQueryable<RealEstate> GetById(int id);
+        IQueryable<Question> GetById(int id);
         
-        int AddNew(RealEstate newRealEstate, string userId);
+        int AddNew(Question newRealEstate, string userId);
     }
 }

@@ -3,14 +3,14 @@
     using System.Linq;
     using PsyhosAndroidAppServer.Data.Models;
 
-    public interface ICommentsService
+    public interface IResultService
     {
-        IQueryable<Comment> GetAllByRealEstate(int realEstateId, int skip, int take);
+        IQueryable<Result> GetAllByRealEstate(int realEstateId, int skip, int take);
 
-        IQueryable<Comment> GetById(int id);
+        IQueryable<Result> GetById(int id);
 
-        IQueryable<Comment> GetAllByUser(string username, int skip, int take);
+        IQueryable<Result> GetAllByUser(string username, int skip, int take);
 
-        int AddNew(Comment comment, string userId);
+        int AddNew(Result comment, string userId);
     }
 }

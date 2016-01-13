@@ -5,12 +5,12 @@
     using Data.Models;
     using Infrastructure.Mappings;
 
-    public class RatingRequestModel : IMapFrom<Rating>
+    public class RatingRequestModel : IMapFrom<Result>
     {
         [Required]
         public string UserId { get; set; }
 
-        [Range(UserConstants.RatingMinValue, UserConstants.RatingMaxMavue)]
+        [Range(1, 2)]
         public int Value { get; set; }
     }
 }

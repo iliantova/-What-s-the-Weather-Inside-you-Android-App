@@ -12,12 +12,12 @@
     {
         private ICollection<FeelingsPicture> feelingsPicture;
 
-        [Required]
+        
         [MinLength(UserConstants.NameMinLength)]
         [MaxLength(UserConstants.NameMaxLength)]
         public string FirstName { get; set; }
 
-        [Required]
+        
         [MinLength(UserConstants.NameMinLength)]
         [MaxLength(UserConstants.NameMaxLength)]
         public string LastName { get; set; }

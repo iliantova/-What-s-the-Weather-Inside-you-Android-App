@@ -14,17 +14,17 @@
 
     public class RealEstatesController : ApiController
     {
-        private readonly IRealEstatesService realEstates;
+        private readonly IQuestionService realEstates;
 
-        public RealEstatesController(IRealEstatesService realEstates)
+        public RealEstatesController(IQuestionService realEstates)
         {
             this.realEstates = realEstates;
         }
 
         [ValidateTake]
         public IHttpActionResult Get(
-            int skip = RealEstateConstants.DefaultRealEstateSkip,
-            int take = RealEstateConstants.DefaultRealEstateTake)
+            int skip = 1,
+            int take = 2)
         {
             var result = this.realEstates
                 .GetAll(skip, take)
@@ -58,7 +58,7 @@
         [ValidateModel]
         public IHttpActionResult Post(RealEstateRequestModel model)
         {
-            var newRealEstate = Mapper.Map<RealEstate>(model);
+            var newRealEstate = Mapper.Map<Question>(model);
             var id = this.realEstates.AddNew(newRealEstate, this.User.Identity.GetUserId());
 
             var result = this.realEstates

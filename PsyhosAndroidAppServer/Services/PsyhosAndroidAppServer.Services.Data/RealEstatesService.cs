@@ -6,35 +6,35 @@
     using PsyhosAndroidAppServer.Data.Models;
     using PsyhosAndroidAppServer.Data.Repositories;
 
-    public class RealEstatesService : IRealEstatesService
+    public class QuestionEstatesService : IQuestionService
     {
-        private readonly IRepository<RealEstate> realEstates;
+        private readonly IRepository<Question> realEstates;
 
-        public RealEstatesService(IRepository<RealEstate> realEstates)
+        public QuestionEstatesService(IRepository<Question> realEstates)
         {
             this.realEstates = realEstates;
         }
         
-        public IQueryable<RealEstate> GetAll(int skip, int take)
+        public IQueryable<Question> GetAll(int skip, int take)
         {
             return this.realEstates
                 .All()
-                .OrderByDescending(r => r.CreatedOn)
+                .OrderByDescending(r => r.Id)
                 .Skip(skip)
                 .Take(take);
         }
 
-        public IQueryable<RealEstate> GetById(int id)
+        public IQueryable<Question> GetById(int id)
         {
             return this.realEstates
                 .All()
                 .Where(r => r.Id == id);
         }
 
-        public int AddNew(RealEstate newRealEstate, string userId)
+        public int AddNew(Question newRealEstate, string userId)
         {
-            newRealEstate.CreatedOn = DateTime.UtcNow;
-            newRealEstate.UserId = userId;
+            //newRealEstate.t = DateTime.UtcNow;
+            //newRealEstate.UserId = userId;
 
             this.realEstates.Add(newRealEstate);
             this.realEstates.SaveChanges();
