@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 public class QuizActivity extends FragmentActivity {
 
     QuizQuestionsPagerAdapter mQuizQuestionsPagerAdapter;
-    private static final String RESULTFRAGMENT_TAG = "RSTAG";
+    private static final String RESULTFRAGMENT_TAG = "abraca";
 
     @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.pager) ViewPager _viewPager;

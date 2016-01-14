@@ -16,10 +16,18 @@ import android.widget.Toast;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers;
 
+import java.io.IOException;
 import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
@@ -31,6 +39,21 @@ public class SignupActivity extends AppCompatActivity {
     @Bind(R.id.btn_signup) Button _signupButton;
     @Bind(R.id.link_login) TextView _loginLink;
     @Bind(R.id.link_login_anon) TextView _loginAnonLink;
+
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    OkHttpClient client = new OkHttpClient();
+
+    Call post(String url, String json, Callback callback) throws IOException {
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+        return call;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,9 +77,37 @@ public class SignupActivity extends AppCompatActivity {
         _loginAnonLink.setTypeface(face);
         _loginAnonLink.setTextSize(20);
 
+
+        final String json = bowlingJson("blaaaaaaa", "123456", "123456", "blabla@bla.com");
+
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                try {
+                    post("http://psyhosgit.apphb.com/api/Account/Register", json, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            if (response.isSuccessful()) {
+                                String responseStr = response.body().string();
+                                // Do what you want to do with the response.
+                                Toast.makeText(getBaseContext(), "YU-PI-KA-EIII-MtoherFrackeeer!", Toast.LENGTH_LONG).show();
+                            } else {
+                                // Request not successful
+                                Toast.makeText(getBaseContext(), "POCHTI YU-PI-KA-EIII", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 signup();
             }
         });
@@ -177,4 +228,13 @@ public class SignupActivity extends AppCompatActivity {
 
         return valid;
     }
+
+
+    public String bowlingJson(String username, String password, String confirmPassword, String email) {
+        return  "{'Username':'" + username + "'}," +
+                "{'Password':'" + password + "'}," +
+                "{'ConfirmPassword':'" + confirmPassword + "'}," +
+                "{'Email':'" + email + "'},";
+    }
+
 }

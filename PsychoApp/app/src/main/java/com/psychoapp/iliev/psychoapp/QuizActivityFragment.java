@@ -51,6 +51,8 @@ public class QuizActivityFragment extends Fragment {
         // fonts are situated in assets/fonts
         Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
 
+
+
         _btn_option_1.setTypeface(face);
         _btn_option_2.setTypeface(face);
         _btn_option_3.setTypeface(face);
