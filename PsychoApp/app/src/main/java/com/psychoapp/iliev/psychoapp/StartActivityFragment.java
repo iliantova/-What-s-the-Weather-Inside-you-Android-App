@@ -16,6 +16,11 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.psychoapp.iliev.psychoapp.HelpersApp.CRUT;
+import com.psychoapp.iliev.psychoapp.HelpersApp.PostDataTask;
+
+import java.io.IOException;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -81,6 +86,14 @@ public class StartActivityFragment extends Fragment {
                     Toast.makeText(getContext(),
                             "_chartButton",
                             Toast.LENGTH_SHORT).show();
+                   // CRUT crut = new CRUT();
+                    //crut.execute();
+
+                    try {
+                        PostDataTask.main();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else if (curentId == _lastResultButton.getId()){
                     Toast.makeText(getContext(),
