@@ -2,6 +2,7 @@ package com.psychoapp.iliev.psychoapp;
 
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers;
+import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.RetreiveFeedTask;
 
 import java.util.Random;
 
@@ -67,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 login();
             }
         });
@@ -123,14 +126,18 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        final String email = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
+                        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
+                        lregisterTask.execute("MAIMUNA");
+
                         // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
                         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
