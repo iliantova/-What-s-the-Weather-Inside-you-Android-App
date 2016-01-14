@@ -130,13 +130,14 @@ public class LoginActivity extends AppCompatActivity {
         final String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
-
+        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
+        lregisterTask.execute("MAIMUNA");
+        String status = lregisterTask.getStatus().toString();
+        Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-                        lregisterTask.execute("MAIMUNA");
 
                         // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
