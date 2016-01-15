@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by iliev on 1/14/2016.
@@ -31,37 +33,36 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
         String response = null;
 
         // Do some validation here
-        String API_URL = "http://psyhosgit.apphb.com/api/Account/Register";
-        String username = "MAIMUNA";
-        String password = "123456";
-        String confirmPassword = "123456";
-        String email = "maimuna@maimuna.com";
+        String API_URL_register = "http://psyhosgit.apphb.com/api/Account/Register";
+        String API_URL_token = "http://psyhosgit.apphb.com/token";
 
         HttpURLConnection urlConnection = null;
         BufferedReader bufferedReader = null;
 
         try {
+            // sample code for passing login body parameters
+            String loginParams  =
+                    "Username="+urls[0]
+                    +"&Password="+urls[1]
+                    +"&grant_type="+"password";
 
-            String urlParameters  =
-                    "Username="+username
-                    +"&Password="+password
-                    +"&ConfirmPassword="+confirmPassword
-                    +"%Email="+email;
-            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            byte[] postData = loginParams.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
-            String request = API_URL;
+            String request = API_URL_token;
             URL url  = new URL(request);
 
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            urlConnection.setDoOutput( true );
+            urlConnection.setDoOutput(true);
             urlConnection.setInstanceFollowRedirects(false);
             urlConnection.setRequestMethod("POST");
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            urlConnection.setRequestProperty( "charset", "utf-8");
-            urlConnection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            urlConnection.setRequestProperty("charset", "UTF-8");
+
+            urlConnection.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+
             urlConnection.setUseCaches(false);
-            //urlConnection.getOutputStream();
+
             urlConnection.connect();
 
             try( DataOutputStream wr = new DataOutputStream( urlConnection.getOutputStream())) {

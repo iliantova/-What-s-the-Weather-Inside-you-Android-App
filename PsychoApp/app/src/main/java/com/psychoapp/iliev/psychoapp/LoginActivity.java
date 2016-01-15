@@ -2,11 +2,8 @@ package com.psychoapp.iliev.psychoapp;
 
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 
 import android.content.Intent;
@@ -21,8 +18,6 @@ import android.widget.Toast;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.RetreiveFeedTask;
 
-import java.util.Random;
-
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
@@ -31,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 0;
 
     @Bind(R.id.background_image) ProportionalImageView _background;
-    @Bind(R.id.input_email) EditText _emailText;
+    @Bind(R.id.input_username) EditText _username;
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_login) Button _loginButton;
     @Bind(R.id.link_signup) TextView _signupLink;
@@ -48,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         // use this for custom font importing to selected UI elements
         // fonts are situated in assets/fonts
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
-        _emailText.setTypeface(face);
-        _emailText.setTextSize(20);
+        _username.setTypeface(face);
+        _username.setTextSize(20);
         _passwordText.setTypeface(face);
         _passwordText.setTextSize(20);
         _loginButton.setTypeface(face);
@@ -59,17 +54,15 @@ public class LoginActivity extends AppCompatActivity {
         _googleLink.setTypeface(face);
         _googleLink.setTextSize(20);
 
-        _emailText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+        _username.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _passwordText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _loginButton.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _signupLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _googleLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 login();
             }
         });
@@ -126,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        final String email = _emailText.getText().toString();
+        final String username = _username.getText().toString();
         final String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
@@ -136,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-                        lregisterTask.execute("MAIMUNA");
+                        lregisterTask.execute(username, password);
                         String status = lregisterTask.getStatus().toString();
                         Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
                         // On complete call either onLoginSuccess or onLoginFailed
@@ -181,17 +174,17 @@ public class LoginActivity extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String email = _emailText.getText().toString();
+        String username = _username.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+        if (username.isEmpty() || username.length() < 2 || username.length() > 50) {
+            _username.setError("enter a valid username");
             valid = false;
         } else {
-            _emailText.setError(null);
+            _username.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+        if (password.isEmpty() || password.length() < 4 || password.length() > 20) {
             _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
