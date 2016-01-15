@@ -23,6 +23,8 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
 
     protected String doInBackground(String... urls) {
 
+        String status = null;
+
         // Do some validation here
         String API_URL = "http://psyhosgit.apphb.com/api/Account/Register";
         String username = "MAIMUNA";
@@ -45,11 +47,12 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
             urlConnection.setRequestProperty("ConfirmPassword", confirmPassword);
             urlConnection.setRequestProperty("Email", email);
 
-            //urlConnection.setDoOutput(true);
+            urlConnection.setDoOutput(true);
             urlConnection.getOutputStream();
             //urlConnection.setInstanceFollowRedirects(false);
             urlConnection.connect();
 
+            status = urlConnection.getResponseMessage().toString();
 
         }
         catch(Exception e) {
@@ -57,7 +60,7 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
             return null;
         }
 
-        return API_URL;
+        return status;
     }
 
     protected void onPostExecute(String response) {
@@ -65,6 +68,6 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
             response = "THERE WAS AN ERROR";
         }
 
-        Log.i("INFO", response);
+        Log.i("TOPLO INFO OT SERVERA ", response);
     }
 }

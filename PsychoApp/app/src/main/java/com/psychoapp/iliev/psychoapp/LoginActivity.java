@@ -130,15 +130,15 @@ public class LoginActivity extends AppCompatActivity {
         final String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
-        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-        lregisterTask.execute("MAIMUNA");
-        String status = lregisterTask.getStatus().toString();
-        Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-
+                        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
+                        lregisterTask.execute("MAIMUNA");
+                        String status = lregisterTask.getStatus().toString();
+                        Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
                         // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
                         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
@@ -154,7 +154,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
                 this.finish();
