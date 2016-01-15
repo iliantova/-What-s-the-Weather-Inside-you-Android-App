@@ -40,6 +40,8 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
         String passedParams = null;
         String API_KEY = null;
 
+        BufferedReader reader = null;
+
         try {
             if (urls[0].equals("LOGIN_PARAMS")) {
                 // sample code for passing login body parameters
@@ -86,8 +88,31 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
             response = urlConnection.getResponseMessage().toString();
             result[0] = response;
 
-            // TODO use adding string to result[1] to retreive the outputStrem from server
-            result[1] = "";
+            // Read the input stream into a String
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuffer buffer = new StringBuffer();
+            if (inputStream == null) {
+                // Nothing to do.
+                return null;
+            }
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
+                // But it does make debugging a *lot* easier if you print out the completed
+                // buffer for debugging.
+                buffer.append(line + "\n");
+            }
+
+            if (buffer.length() == 0) {
+                // Stream was empty.  No point in parsing.
+                return null;
+            }
+
+            // TODO use adding string to result[1] to retrieve the outputStraem from server and use custom jsonParser
+            result[1] = buffer.toString();
+
         }
         catch(Exception e) {
             Log.e("STAMAT ERROR PESHO", e.getMessage(), e);
@@ -103,6 +128,6 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
             res = "NO Response from Server";
         }
 
-        Log.i("TOPLO INFO OT SERVERA ", result[0]);
+        Log.i("TOPLO INFO OT SERVERA ", result[1]);
     }
 }
