@@ -1,15 +1,19 @@
 package com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers;
 
+import android.annotation.TargetApi;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by iliev on 1/14/2016.
@@ -21,9 +25,10 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
     protected void onPreExecute() {
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     protected String doInBackground(String... urls) {
 
-        String status = null;
+        String response = null;
 
         // Do some validation here
         String API_URL = "http://psyhosgit.apphb.com/api/Account/Register";
@@ -36,31 +41,41 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
         BufferedReader bufferedReader = null;
 
         try {
-            URL url = new URL(API_URL);
+
+            String urlParameters  =
+                    "Username="+username
+                    +"&Password="+password
+                    +"&ConfirmPassword="+confirmPassword
+                    +"%Email="+email;
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+            String request = API_URL;
+            URL url  = new URL(request);
 
             urlConnection = (HttpURLConnection) url.openConnection();
 
+            urlConnection.setDoOutput( true );
+            urlConnection.setInstanceFollowRedirects(false);
             urlConnection.setRequestMethod("POST");
-
-            urlConnection.setRequestProperty("Username", username);
-            urlConnection.setRequestProperty("Password", password);
-            urlConnection.setRequestProperty("ConfirmPassword", confirmPassword);
-            urlConnection.setRequestProperty("Email", email);
-
-            urlConnection.setDoOutput(true);
-            urlConnection.getOutputStream();
-            //urlConnection.setInstanceFollowRedirects(false);
+            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConnection.setRequestProperty( "charset", "utf-8");
+            urlConnection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            urlConnection.setUseCaches(false);
+            //urlConnection.getOutputStream();
             urlConnection.connect();
 
-            status = urlConnection.getResponseMessage().toString();
+            try( DataOutputStream wr = new DataOutputStream( urlConnection.getOutputStream())) {
+                wr.write( postData );
+            }
+
+            response = urlConnection.getResponseMessage().toString();
 
         }
         catch(Exception e) {
             Log.e("ERROR", e.getMessage(), e);
             return null;
         }
-
-        return status;
+        return response;
     }
 
     protected void onPostExecute(String response) {
