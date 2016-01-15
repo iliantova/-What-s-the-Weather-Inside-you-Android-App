@@ -24,13 +24,13 @@ public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     private static final String REGISTER_PARAMS = "REGISTER_PARAMS";
 
-    @Bind(R.id.background_image) ProportionalImageView _background;
-    @Bind(R.id.input_name) EditText _nameText;
-    @Bind(R.id.input_email) EditText _emailText;
-    @Bind(R.id.input_password) EditText _passwordText;
-    @Bind(R.id.btn_signup) Button _signupButton;
-    @Bind(R.id.link_login) TextView _loginLink;
-    @Bind(R.id.link_login_anon) TextView _loginAnonLink;
+    @Bind(R.id.background_image) ProportionalImageView _pim_backgrond_image;
+    @Bind(R.id.input_name) EditText _et_input_name;
+    @Bind(R.id.input_email) EditText _et_input_email;
+    @Bind(R.id.input_password) EditText _et_input_password;
+    @Bind(R.id.btn_signup) Button _btn_signup;
+    @Bind(R.id.link_login) TextView _tv_link_login;
+    @Bind(R.id.link_login_anon) TextView _tv_login_anon;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,30 +38,30 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
-        Helpers.backgroundRandomizer(_background);
+        Helpers.backgroundRandomizer(_pim_backgrond_image);
 
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
-        _nameText.setTypeface(face);
-        _nameText.setTextSize(20);
-        _emailText.setTypeface(face);
-        _emailText.setTextSize(20);
-        _passwordText.setTypeface(face);
-        _passwordText.setTextSize(20);
-        _signupButton.setTypeface(face);
-        _signupButton.setTextSize(24);
-        _loginLink.setTypeface(face);
-        _loginLink.setTextSize(20);
-        _loginAnonLink.setTypeface(face);
-        _loginAnonLink.setTextSize(20);
+        _et_input_name.setTypeface(face);
+        _et_input_name.setTextSize(20);
+        _et_input_email.setTypeface(face);
+        _et_input_email.setTextSize(20);
+        _et_input_password.setTypeface(face);
+        _et_input_password.setTextSize(20);
+        _btn_signup.setTypeface(face);
+        _btn_signup.setTextSize(24);
+        _tv_link_login.setTypeface(face);
+        _tv_link_login.setTextSize(20);
+        _tv_login_anon.setTypeface(face);
+        _tv_login_anon.setTextSize(20);
 
-        _signupButton.setOnClickListener(new View.OnClickListener() {
+        _btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signup();
             }
         });
 
-        _loginLink.setOnClickListener(new View.OnClickListener() {
+        _tv_link_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Finish the registration screen and return to the Login activity
@@ -69,7 +69,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        _loginAnonLink.setOnClickListener(new View.OnClickListener() {
+        _tv_login_anon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Finish the registration screen and load the anonymious usage pageview
@@ -80,7 +80,7 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         Animation fadeIn = AnimationUtils.loadAnimation(SignupActivity.this, R.anim.fade_in);
-        _background.startAnimation(fadeIn);
+        _pim_backgrond_image.startAnimation(fadeIn);
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -104,7 +104,7 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        _signupButton.setEnabled(false);
+        _btn_signup.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -112,9 +112,9 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        final String username = _nameText.getText().toString();
-        final String email = _emailText.getText().toString();
-        final String password = _passwordText.getText().toString();
+        final String username = _et_input_name.getText().toString();
+        final String email = _et_input_email.getText().toString();
+        final String password = _et_input_password.getText().toString();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -133,7 +133,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onSignupSuccess() {
-        _signupButton.setEnabled(true);
+        _btn_signup.setEnabled(true);
         setResult(RESULT_OK, null);
 
         finish();
@@ -142,35 +142,35 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
-        _signupButton.setEnabled(true);
+        _btn_signup.setEnabled(true);
     }
 
     public boolean validate() {
         boolean valid = true;
 
-        String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        String name = _et_input_name.getText().toString();
+        String email = _et_input_email.getText().toString();
+        String password = _et_input_password.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
-            _nameText.setError("at least 3 characters");
+            _et_input_name.setError("at least 3 characters");
             valid = false;
         } else {
-            _nameText.setError(null);
+            _et_input_name.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+            _et_input_email.setError("enter a valid email address");
             valid = false;
         } else {
-            _emailText.setError(null);
+            _et_input_email.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+            _et_input_password.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
-            _passwordText.setError(null);
+            _et_input_password.setError(null);
         }
 
         return valid;

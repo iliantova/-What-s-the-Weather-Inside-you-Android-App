@@ -25,6 +25,8 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
     @Bind(R.id.fragment_start_conteiner) LinearLayout _ll_frag_start;
+    @Bind(R.id.toolbar) Toolbar _tb_toolbar;
+    @Bind(R.id.background_image) ProportionalImageView _pim_background_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +47,9 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_start_conteiner, firstFragment).commit();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-       toolbar.setLogo(R.drawable.logo);
+        setSupportActionBar(_tb_toolbar);
+        _tb_toolbar.setLogo(R.drawable.logo);
 
-        ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
         Random r = new Random();
         int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
         int res;
@@ -64,8 +64,7 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
             case 7 : res = R.drawable.aquarell_night_400_655; break;
             default: res = R.drawable.aquarell_night_400_655; break;
         }
-        v.setBackgroundResource(res);
-
+        _pim_background_image.setBackgroundResource(res);
 
     }
     @Override

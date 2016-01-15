@@ -47,10 +47,8 @@ public class QuizActivity extends FragmentActivity {
 
         Helpers.backgroundRandomizer(_background);
 
-        // Create an adapter that when requested, will return a fragment representing an object in
-        // the collection.
-        // ViewPager and its adapters use support library fragments, so we must use
-        // getSupportFragmentManager.
+        // Create an adapter that when requested, will return a fragment representing an object in the collection.
+        // ViewPager and its adapters use support library fragments, so we must use getSupportFragmentManager.
         mQuizQuestionsPagerAdapter = new QuizQuestionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager, attaching the adapter.
@@ -68,6 +66,8 @@ public class QuizActivity extends FragmentActivity {
          public Fragment getItem(int i) {
             Fragment fragment = new QuizActivityFragment();
             Bundle args = new Bundle();
+
+            // here we shoulld pass the questions and answers from the server (instead of i)
             args.putInt(QuizActivityFragment.ARG_OBJECT, i + 1); // Our object is just an integer :-P
             fragment.setArguments(args);
 

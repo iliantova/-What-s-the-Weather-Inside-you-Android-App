@@ -47,6 +47,7 @@ public class StartActivityFragment extends Fragment {
         Context context = getActivity();
 
         ButterKnife.bind(this, view);
+
         Toast.makeText(getContext(),
                 "rabotq",
                 Toast.LENGTH_SHORT).show();

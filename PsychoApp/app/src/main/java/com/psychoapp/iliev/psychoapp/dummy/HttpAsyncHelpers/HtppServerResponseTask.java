@@ -27,6 +27,8 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     protected String[] doInBackground(String... urls) {
 
+        // result[0] will be response message from server (control)
+        // result[1] will string with be the actual content from the outputStream from server
         String[] result = {"", ""};
         String response = null;
 

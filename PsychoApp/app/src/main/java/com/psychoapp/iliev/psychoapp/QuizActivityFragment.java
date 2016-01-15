@@ -41,17 +41,12 @@ public class QuizActivityFragment extends Fragment {
     @Bind(R.id.tv_next_option) TextView _tv_next_option;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_quiz, container, false);
         final Bundle args = getArguments();
         ButterKnife.bind(this, rootView);
 
-        // use this for custom font importing to selected UI elements
-        // fonts are situated in assets/fonts
         Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
-
-
 
         _btn_option_1.setTypeface(face);
         _btn_option_2.setTypeface(face);
