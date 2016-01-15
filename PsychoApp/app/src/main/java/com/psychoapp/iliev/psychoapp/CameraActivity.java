@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.psychoapp.iliev.psychoapp.dummy.BackGroundChanger;
+
 import java.io.File;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class CameraActivity extends AppCompatActivity {
 
     @Bind(R.id.btnTakePic) Button _btn_take_pic;
     @Bind(R.id.ivThumbnailPhoto) ImageView _ivThumbnailPhoto;
+    @Bind(R.id.background_image) ProportionalImageView _background;
 
     Bitmap bitMap;
     static int TAKE_PICTURE = 1;
@@ -37,6 +40,7 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ButterKnife.bind(this);
 
+        BackGroundChanger.backgroundRandomizer(_background);
         // Get reference to views
         _ivThumbnailPhoto = (ImageView) findViewById(R.id.ivThumbnailPhoto);
 

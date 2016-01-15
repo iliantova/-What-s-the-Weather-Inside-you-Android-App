@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.psychoapp.iliev.psychoapp.dummy.Helpers;
+import com.psychoapp.iliev.psychoapp.dummy.BackGroundChanger;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
 
 import butterknife.ButterKnife;
@@ -38,7 +38,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
-        Helpers.backgroundRandomizer(_pim_backgrond_image);
+        BackGroundChanger.backgroundRandomizer(_pim_backgrond_image);
 
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _et_input_name.setTypeface(face);

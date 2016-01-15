@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.psychoapp.iliev.psychoapp.dummy.Helpers;
+import com.psychoapp.iliev.psychoapp.dummy.BackGroundChanger;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
 
 import butterknife.ButterKnife;
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        Helpers.backgroundRandomizer(_background);
+        BackGroundChanger.backgroundRandomizer(_background);
 
         // use this for custom font importing to selected UI elements
         // fonts are situated in assets/fonts

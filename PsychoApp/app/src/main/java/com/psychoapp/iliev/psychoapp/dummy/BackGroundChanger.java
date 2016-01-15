@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * Created by iliev on 1/11/2016.
  */
-public class Helpers {
+public class BackGroundChanger {
 
     private static final int BACKGROUND_IMAGES_NUM = 8;
 

@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.psychoapp.iliev.psychoapp.dummy.BackGroundChanger;
+
 import java.util.Random;
 
 import butterknife.Bind;
@@ -34,6 +36,8 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
 
+        BackGroundChanger.backgroundRandomizer(_pim_background_image);
+
         Intent intent = getIntent();
         String fragmentName = intent.getStringExtra("fragment");
         String frag = "fragment_result";
@@ -49,23 +53,6 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
 
         setSupportActionBar(_tb_toolbar);
         _tb_toolbar.setLogo(R.drawable.logo);
-
-        Random r = new Random();
-        int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
-        int res;
-        switch (randomInt) {
-            case 0 : res = R.drawable.c; break;
-            case 1 : res = R.drawable.d; break;
-            case 2 : res = R.drawable.e; break;
-            case 3 : res = R.drawable.f; break;
-            case 4 : res = R.drawable.g; break;
-            case 5 : res = R.drawable.h; break;
-            case 6 : res = R.drawable.j; break;
-            case 7 : res = R.drawable.aquarell_night_400_655; break;
-            default: res = R.drawable.aquarell_night_400_655; break;
-        }
-        _pim_background_image.setBackgroundResource(res);
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
