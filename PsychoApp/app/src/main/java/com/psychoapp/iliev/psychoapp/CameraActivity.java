@@ -37,8 +37,6 @@ public class CameraActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         BackGroundChanger.backgroundRandomizer(_background);
-        // Get reference to views
-        _ivThumbnailPhoto = (ImageView) findViewById(R.id.ivThumbnailPhoto);
 
         // add onclick listener to the button
         _btn_take_pic.setOnClickListener(cameraAction);
@@ -54,8 +52,7 @@ public class CameraActivity extends AppCompatActivity {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             // this part to save captured image on provided path
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
-                    "my-photo.jpg");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "my-photo.jpg");
             Uri photoPath = Uri.fromFile(file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoPath);
 
