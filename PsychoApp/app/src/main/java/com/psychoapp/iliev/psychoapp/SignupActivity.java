@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.RetreiveFeedTask;
+import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
@@ -57,7 +57,6 @@ public class SignupActivity extends AppCompatActivity {
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 signup();
             }
         });
@@ -73,7 +72,6 @@ public class SignupActivity extends AppCompatActivity {
         _loginAnonLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // Finish the registration screen and load the anonymious usage pageview
                 Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
                 startActivity(intent);
@@ -121,16 +119,13 @@ public class SignupActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
+                        HtppServerResponseTask registerTask = new HtppServerResponseTask();
+                        registerTask.execute(REGISTER_PARAMS, username, password, password, email);
 
-                        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-                        lregisterTask.execute(REGISTER_PARAMS, username, password, password, email);
-
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
                         onSignupSuccess();
                         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                         startActivity(intent);
-                        // onSignupFailed();
+
                         progressDialog.dismiss();
                     }
                 }, 3000);

@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
+public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
 
     private Exception exception;
 
@@ -25,8 +25,9 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    protected String doInBackground(String... urls) {
+    protected String[] doInBackground(String... urls) {
 
+        String[] result = {"", ""};
         String response = null;
 
         // Do some validation here
@@ -34,29 +35,30 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
         String API_URL_token = "http://psyhosgit.apphb.com/token";
 
         HttpURLConnection urlConnection = null;
-        BufferedReader bufferedReader = null;
-        String loginParams = null;
+        String passedParams = null;
         String API_KEY = null;
 
         try {
             if (urls[0].equals("LOGIN_PARAMS")) {
                 // sample code for passing login body parameters
-                loginParams  =
+                passedParams  =
                         "Username="+urls[1]
                         +"&Password="+urls[2]
                         +"&grant_type="+"password";
                 API_KEY = API_URL_token;
 
             } else if (urls[0].equals("REGISTER_PARAMS")) {
-                loginParams  =
+                passedParams  =
                         "Username="+urls[1]
                         +"&Password="+urls[2]
                         +"&ConfirmPassword="+urls[3]
                         +"&Email="+urls[4];
                 API_KEY = API_URL_register;
+            } else {
+                return null;
             }
 
-            byte[] postData = loginParams.getBytes(StandardCharsets.UTF_8);
+            byte[] postData = passedParams.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
             String request = API_KEY;
             URL url  = new URL(request);
@@ -80,20 +82,25 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
             }
 
             response = urlConnection.getResponseMessage().toString();
+            result[0] = response;
 
+            // TODO use adding string to result[1] to retreive the outputStrem from server
+            result[1] = "";
         }
         catch(Exception e) {
             Log.e("STAMAT ERROR PESHO", e.getMessage(), e);
             return null;
         }
-        return response;
+
+        return result;
     }
 
-    protected void onPostExecute(String response) {
-        if(response == null) {
-            response = "THERE WAS AN ERROR";
+    protected void onPostExecute(String[] result) {
+        String res = "";
+        if(result[0] == null || result[0].equals("")) {
+            res = "NO Response from Server";
         }
 
-        Log.i("TOPLO INFO OT SERVERA ", response);
+        Log.i("TOPLO INFO OT SERVERA ", result[0]);
     }
 }

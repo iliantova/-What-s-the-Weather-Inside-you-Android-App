@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.RetreiveFeedTask;
+import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
@@ -129,10 +129,10 @@ public class LoginActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-                        lregisterTask.execute(LOGIN_PARAMS, username, password);
+                        HtppServerResponseTask loginTask = new HtppServerResponseTask();
+                        loginTask.execute(LOGIN_PARAMS, username, password);
 
-                        String status = lregisterTask.getStatus().toString();
+                        String status = loginTask.getStatus().toString();
                         Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
                         // On complete call either onLoginSuccess or onLoginFailed
                         onLoginSuccess();
