@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.psychoapp.iliev.psychoapp.dummy.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

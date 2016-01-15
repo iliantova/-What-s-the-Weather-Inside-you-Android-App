@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.psychoapp.iliev.psychoapp.dummy.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
