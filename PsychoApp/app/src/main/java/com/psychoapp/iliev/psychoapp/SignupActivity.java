@@ -22,6 +22,7 @@ import butterknife.Bind;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
+    private static final String REGISTER_PARAMS = "REGISTER_PARAMS";
 
     @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.input_name) EditText _nameText;
@@ -113,19 +114,17 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
-
-        // TODO: Implement your own signup logic here.
-
+        final String username = _nameText.getText().toString();
+        final String email = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
 
                         RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-                        lregisterTask.execute("94043");
+                        lregisterTask.execute(REGISTER_PARAMS, username, password, password, email);
+
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
                         onSignupSuccess();

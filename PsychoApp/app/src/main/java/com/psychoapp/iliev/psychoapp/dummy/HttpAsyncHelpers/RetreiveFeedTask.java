@@ -17,9 +17,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by iliev on 1/14/2016.
- */
 public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
 
     private Exception exception;
@@ -38,17 +35,30 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
 
         HttpURLConnection urlConnection = null;
         BufferedReader bufferedReader = null;
+        String loginParams = null;
+        String API_KEY = null;
 
         try {
-            // sample code for passing login body parameters
-            String loginParams  =
-                    "Username="+urls[0]
-                    +"&Password="+urls[1]
-                    +"&grant_type="+"password";
+            if (urls[0].equals("LOGIN_PARAMS")) {
+                // sample code for passing login body parameters
+                loginParams  =
+                        "Username="+urls[1]
+                        +"&Password="+urls[2]
+                        +"&grant_type="+"password";
+                API_KEY = API_URL_token;
+
+            } else if (urls[0].equals("REGISTER_PARAMS")) {
+                loginParams  =
+                        "Username="+urls[1]
+                        +"&Password="+urls[2]
+                        +"&ConfirmPassword="+urls[3]
+                        +"&Email="+urls[4];
+                API_KEY = API_URL_register;
+            }
 
             byte[] postData = loginParams.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
-            String request = API_URL_token;
+            String request = API_KEY;
             URL url  = new URL(request);
 
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -73,7 +83,7 @@ public class RetreiveFeedTask extends AsyncTask<String, Void, String> {
 
         }
         catch(Exception e) {
-            Log.e("ERROR", e.getMessage(), e);
+            Log.e("STAMAT ERROR PESHO", e.getMessage(), e);
             return null;
         }
         return response;

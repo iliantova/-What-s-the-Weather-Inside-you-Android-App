@@ -24,6 +24,7 @@ import butterknife.Bind;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private static final String LOGIN_PARAMS = "LOGIN_PARAMS";
 
     @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.input_username) EditText _username;
@@ -129,7 +130,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-                        lregisterTask.execute(username, password);
+                        lregisterTask.execute(LOGIN_PARAMS, username, password);
+
                         String status = lregisterTask.getStatus().toString();
                         Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
                         // On complete call either onLoginSuccess or onLoginFailed
