@@ -12,7 +12,9 @@ import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.DataParser;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
@@ -51,6 +53,8 @@ public class QuizActivity extends FragmentActivity {
         }
         Log.e("QUESTIONS GET", result[0]);
         Log.e("QUESTIONS RESULT", result[1]);
+
+
 
 //        String resultQuestions = null;
 //        try {

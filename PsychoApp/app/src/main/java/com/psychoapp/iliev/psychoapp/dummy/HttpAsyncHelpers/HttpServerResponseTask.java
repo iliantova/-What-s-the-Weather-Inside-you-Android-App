@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -158,6 +162,20 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, String[]> {
 
             // TODO use adding string to result[1] to retrieve the outputStraem from server and use custom jsonParser
             result[1] = buffer.toString();
+
+            JSONArray jsonRootObject = null;
+            try {
+                jsonRootObject = new JSONArray(result[1]);
+                for (int i = 0; i < jsonRootObject.length(); i++) {
+                    JSONObject jsonobject = jsonRootObject.getJSONObject(i);
+                    String name = jsonobject.getString("Text");
+                    Log.e("JSON obj YRAAAAAA", name);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
 
         }
         catch(Exception e) {
