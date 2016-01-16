@@ -16,6 +16,8 @@ namespace PsyhosAndroidAppServer.Web.Api.Models.Answers
         [MaxLength(TextConstants.TextMaxLength)]
         public string Text { get; set; }
 
+        public int Value { get; set; }
+
         public int QuestionId { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

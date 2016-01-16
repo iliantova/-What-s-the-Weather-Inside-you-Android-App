@@ -25,7 +25,7 @@
         public IHttpActionResult Get()
         {
             var result = this.questions
-                .GetTenRandomQuestions()
+                .GetAll()
                 .ProjectTo<ListedQuestionResponseModel>()
                 .ToList();
 

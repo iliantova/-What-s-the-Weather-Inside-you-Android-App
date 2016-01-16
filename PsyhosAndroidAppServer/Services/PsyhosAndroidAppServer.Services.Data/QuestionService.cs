@@ -15,13 +15,11 @@
             this.questions = questions;
         }
         
-        public IQueryable<Question> GetAll(int skip = 0, int take = 0)
+        public IQueryable<Question> GetAll()
         {
             return this.questions
                 .All()
-                .OrderByDescending(r => r.Id)
-                .Skip(skip)
-                .Take(take);
+                .OrderByDescending(r => r.Id);
         }
 
         public IQueryable<Question> GetById(int id)

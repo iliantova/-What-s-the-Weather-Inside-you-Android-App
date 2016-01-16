@@ -8,7 +8,7 @@
     public class PsyhosAndroidAppServerDbContext : IdentityDbContext<User>, IPsyhosAndroidAppServerDbContext
     {
         public PsyhosAndroidAppServerDbContext()
-            : base("DefautConections", throwIfV1Schema: false)
+            : base("DefautConnections", throwIfV1Schema: false)
         {
             
         }

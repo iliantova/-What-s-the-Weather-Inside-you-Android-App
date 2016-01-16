@@ -213,7 +213,7 @@
     <Compile Include="Config\NinjectConfig.cs" />
     <Compile Include="Config\Startup.Auth.cs" />
     <Compile Include="Config\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Config\AccountController.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />

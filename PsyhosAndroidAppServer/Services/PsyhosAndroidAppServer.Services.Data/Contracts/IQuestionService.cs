@@ -5,7 +5,7 @@
 
     public interface IQuestionService
     {
-        IQueryable<Question> GetAll(int skip, int take);
+        IQueryable<Question> GetAll();
 
         IQueryable<Question> GetTenRandomQuestions();
 

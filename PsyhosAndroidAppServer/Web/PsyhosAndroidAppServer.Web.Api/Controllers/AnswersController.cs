@@ -53,7 +53,7 @@ namespace PsyhosAndroidAppServer.Web.Api.Controllers
 
         // [Authorize]
         // [ValidateModel]
-        public IHttpActionResult Post(AnswerResponseModel model)
+        public IHttpActionResult Post(AnswerRequestModel model)
         {
             var newAnswer = Mapper.Map<Answer>(model);
             var id = this.answers.AddNew(newAnswer, this.User.Identity.GetUserId());

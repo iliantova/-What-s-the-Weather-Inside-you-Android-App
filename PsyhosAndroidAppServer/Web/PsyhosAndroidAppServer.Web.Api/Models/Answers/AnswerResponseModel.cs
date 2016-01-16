@@ -9,10 +9,9 @@ namespace PsyhosAndroidAppServer.Web.Api.Models.Answers
 {
     public class AnswerResponseModel : IMapFrom<Answer>
     {
-        public int Id { get; set; }
-
         public string Text { get; set; }
 
-        public int QuestionId { get; set; }
+        public int Value { get; set; }
+
     }
 }
