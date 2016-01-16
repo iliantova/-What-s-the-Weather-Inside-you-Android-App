@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 

@@ -14,12 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
+import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
@@ -120,18 +116,18 @@ public class SignupActivity extends AppCompatActivity {
         final String password = _et_input_password.getText().toString();
 
         new android.os.Handler().postDelayed(
-            new Runnable() {
-                public void run() {
-                    HtppServerResponseTask registerTask = new HtppServerResponseTask();
-                    registerTask.execute(REGISTER_PARAMS, username, password, password, email);
+                new Runnable() {
+                    public void run() {
+                        HttpServerResponseTask registerTask = new HttpServerResponseTask();
+                        registerTask.execute(REGISTER_PARAMS, username, password, password, email);
 
-                    onSignupSuccess();
-                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                    startActivity(intent);
+                        onSignupSuccess();
+                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                        startActivity(intent);
 
-                    progressDialog.dismiss();
-                }
-            }, 3000);
+                        progressDialog.dismiss();
+                    }
+                }, 3000);
     }
 
     public void onSignupSuccess() {

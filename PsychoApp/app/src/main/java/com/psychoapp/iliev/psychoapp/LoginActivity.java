@@ -22,7 +22,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
+import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
+
+import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
@@ -137,8 +139,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
@@ -147,17 +148,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         final String password = _passwordText.getText().toString();
 
         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        HtppServerResponseTask loginTask = new HtppServerResponseTask();
-                        loginTask.execute(LOGIN_PARAMS, username, password);
+            new Runnable() {
+                public void run() {
+                    HttpServerResponseTask loginTask = new HttpServerResponseTask();
+                    loginTask.execute(LOGIN_PARAMS, username, password);
 
-                        onLoginSuccess();
-
-                        // onLoginFailed();
-                        progressDialog.dismiss();
+                    // this try/catch will get the response result with get()
+                    String[] res = null;
+                    try {
+                        res = loginTask.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
-                }, 3000);
+                    Log.e("Success Login RES : ", res[1]);
+
+                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                    startActivityForResult(intent, REQUEST_SIGNUP);
+
+                    onLoginSuccess();
+
+                    // onLoginFailed();
+                    progressDialog.dismiss();
+                }
+            }, 3000);
     }
 
 
@@ -182,8 +197,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void onLoginSuccess() {
-        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-        startActivityForResult(intent, REQUEST_SIGNUP);
         _loginButton.setEnabled(true);
         this.finish();
     }

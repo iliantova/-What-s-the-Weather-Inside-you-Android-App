@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -17,9 +18,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
+public class HttpServerResponseTask extends AsyncTask<String, Void, String[]> {
 
     private Exception exception;
+    private final String HTTP_POST_METHOD = "POST";
+    private final String HTTP_GET_METHOD = "GET";
+    private final String HTTP_PUT_METHOD = "PUT";
+
+    private static final String CONTENT_TYPE_X_FORM = "application/x-www-form-urlencoded";
+    private static final String CONTENT_TYPE_JSON = "application/json";
+
+    private final String API_URL_register = "http://psyhosgit.apphb.com/api/Account/Register";
+    private final String API_URL_token = "http://psyhosgit.apphb.com/token";
+    private final String API_URL_questions_getTenRandom = "http://psyhosgit.apphb.com/api/Questions";
 
     protected void onPreExecute() {
     }
@@ -33,12 +44,18 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
         String response = null;
 
         // Do some validation here
-        String API_URL_register = "http://psyhosgit.apphb.com/api/Account/Register";
-        String API_URL_token = "http://psyhosgit.apphb.com/token";
 
         HttpURLConnection urlConnection = null;
+
         String passedParams = null;
         String API_KEY = null;
+        String HTTP_METHOD = null;
+        String CONTENT_TYPE = null;
+
+        byte[] postData = null;
+        String request = null;
+        URL url  = null;
+        int postDataLength = 0;
 
         BufferedReader reader = null;
 
@@ -50,6 +67,8 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
                         +"&Password="+urls[2]
                         +"&grant_type="+"password";
                 API_KEY = API_URL_token;
+                HTTP_METHOD = HTTP_POST_METHOD;
+                CONTENT_TYPE = CONTENT_TYPE_X_FORM;
 
             } else if (urls[0].equals("REGISTER_PARAMS")) {
                 passedParams  =
@@ -58,21 +77,41 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
                         +"&ConfirmPassword="+urls[3]
                         +"&Email="+urls[4];
                 API_KEY = API_URL_register;
+                HTTP_METHOD = HTTP_POST_METHOD;
+                CONTENT_TYPE = CONTENT_TYPE_X_FORM;
+
+            } else if (urls[0].equals("QUESTIONS_10_RANDOM_PARAMS")) {
+                API_KEY = API_URL_questions_getTenRandom;
+                HTTP_METHOD = HTTP_GET_METHOD;
+                CONTENT_TYPE = CONTENT_TYPE_JSON;
+
             } else {
                 return null;
             }
 
-            byte[] postData = passedParams.toString().getBytes("UTF-8");
-            int postDataLength = postData.length;
-            String request = API_KEY;
-            URL url  = new URL(request);
+            // if method is not GET send request body ... else no request body
+            if(!HTTP_METHOD.equals(HTTP_GET_METHOD)) {
+                postData = passedParams.toString().getBytes("UTF-8");
+                postDataLength = postData.length;
+                request = API_KEY;
+                url  = new URL(request);
+            } else {
+                request = API_KEY;
+                url  = new URL(request);
+            }
 
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            urlConnection.setDoOutput(true);
+            urlConnection.setDoOutput(false);
             urlConnection.setInstanceFollowRedirects(false);
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConnection.setRequestMethod(HTTP_METHOD);
+
+            // if method is GEt then add autorization header
+            if(HTTP_METHOD.equals(HTTP_GET_METHOD)) {
+                urlConnection.setRequestProperty("Authorization", urls[1]);
+            }
+
+            urlConnection.setRequestProperty("Content-Type", CONTENT_TYPE);
             urlConnection.setRequestProperty("charset", "UTF-8");
 
             urlConnection.setRequestProperty("Content-Length", Integer.toString(postDataLength));
@@ -81,8 +120,14 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
 
             urlConnection.connect();
 
-            try( DataOutputStream wr = new DataOutputStream( urlConnection.getOutputStream())) {
-                wr.write( postData );
+            // create request body only for POST and PUT
+            if(HTTP_METHOD.equals(HTTP_POST_METHOD) || HTTP_METHOD.equals(HTTP_PUT_METHOD)) {
+                try( DataOutputStream wr = new DataOutputStream( urlConnection.getOutputStream())) {
+                    wr.write( postData );
+                } catch (Exception e) {
+                    Log.e("DataOutputStream error", e.getMessage(), e);
+                    return null;
+                }
             }
 
             response = urlConnection.getResponseMessage().toString();
@@ -90,6 +135,7 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
+            Log.e("INPUT STREAM", inputStream.toString());
             StringBuffer buffer = new StringBuffer();
             if (inputStream == null) {
                 // Nothing to do.
@@ -115,7 +161,7 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
 
         }
         catch(Exception e) {
-            Log.e("STAMAT ERROR PESHO", e.getMessage(), e);
+            Log.e("ResponseTask ERROR", e.getMessage(), e);
             return null;
         }
 
@@ -124,10 +170,12 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
 
     protected void onPostExecute(String[] result) {
         String res = "";
-        if(result[0] == null || result[0].equals("")) {
+        if(result == null || result[0].equals("")) {
             res = "NO Response from Server";
+            Log.i("onPostExecute Error :", res);
+            return;
         }
 
-        Log.i("TOPLO INFO OT SERVERA ", result[1]);
+        Log.i("onPostExecute Result: ", result[1]);
     }
 }
