@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
@@ -39,7 +40,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_login) Button _loginButton;
     @Bind(R.id.link_signup) TextView _signupLink;
-    @Bind(R.id.link_login_google) TextView _googleLink;
+    @Bind(R.id.link_login_google) SignInButton _googleLink;
+    @Bind((R.id.tv_or)) TextView _tv_or;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,14 +75,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         _loginButton.setTextSize(24);
         _signupLink.setTypeface(face);
         _signupLink.setTextSize(20);
-        _googleLink.setTypeface(face);
-        _googleLink.setTextSize(20);
+        _tv_or.setTypeface(face);
+        _tv_or.setTextSize(12);
 
         _username.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _passwordText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _loginButton.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _signupLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
-        _googleLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+//        _googleLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +100,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
-
+        _googleLink.setSize(SignInButton.COLOR_AUTO);
+        _googleLink.setScopes(gso.getScopeArray());
         _googleLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
