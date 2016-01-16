@@ -1,0 +1,4 @@
+D:\TEAM\-What-s-the-Weather-Inside-you-Android-App\PsyhosAndroidAppServer\PsyhosAndroidAppServer.Common\bin\Debug\PsyhosAndroidAppServer.Common.dll
+D:\TEAM\-What-s-the-Weather-Inside-you-Android-App\PsyhosAndroidAppServer\PsyhosAndroidAppServer.Common\bin\Debug\PsyhosAndroidAppServer.Common.pdb
+D:\TEAM\-What-s-the-Weather-Inside-you-Android-App\PsyhosAndroidAppServer\PsyhosAndroidAppServer.Common\obj\Debug\PsyhosAndroidAppServer.Common.dll
+D:\TEAM\-What-s-the-Weather-Inside-you-Android-App\PsyhosAndroidAppServer\PsyhosAndroidAppServer.Common\obj\Debug\PsyhosAndroidAppServer.Common.pdb

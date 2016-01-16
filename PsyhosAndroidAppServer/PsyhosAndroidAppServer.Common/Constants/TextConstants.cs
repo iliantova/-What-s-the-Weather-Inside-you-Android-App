@@ -2,7 +2,7 @@
 {
     public class TextConstants
     {
-        public const int TextMinLength = 10;
-        public const int TextMaxLength = 1000;
+        public const int TextMinLength = 2;
+        public const int TextMaxLength = 250;
     }
 }

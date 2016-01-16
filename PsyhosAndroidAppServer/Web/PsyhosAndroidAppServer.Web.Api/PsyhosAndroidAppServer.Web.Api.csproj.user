@@ -25,7 +25,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-<PropertyGroup>
+  <PropertyGroup>
     <PostBuildEvent>
      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"

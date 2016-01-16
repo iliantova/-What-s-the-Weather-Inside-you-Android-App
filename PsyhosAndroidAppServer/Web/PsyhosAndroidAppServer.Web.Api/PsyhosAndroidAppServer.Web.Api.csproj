@@ -214,8 +214,9 @@
     <Compile Include="Config\Startup.Auth.cs" />
     <Compile Include="Config\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
-    <Compile Include="Controllers\RealEstatesController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -234,12 +235,12 @@
     <Compile Include="Models\Account\RegisterExternalBindingModel.cs" />
     <Compile Include="Models\Account\RemoveLoginBindingModel.cs" />
     <Compile Include="Models\Account\UserInfoViewModel.cs" />
+    <Compile Include="Models\Answers\AnswerRequestModel.cs" />
+    <Compile Include="Models\Answers\AnswerResponseModel.cs" />
     <Compile Include="Models\Comments\CommentRequestModel.cs" />
     <Compile Include="Models\Comments\CommentResponseModel.cs" />
-    <Compile Include="Models\RealEstates\AuthenticatedRealEstateDetailsResponseModel.cs" />
-    <Compile Include="Models\RealEstates\ListedRealEstateResponseModel.cs" />
-    <Compile Include="Models\RealEstates\RealEstateDetailsResponseModel.cs" />
-    <Compile Include="Models\RealEstates\RealEstateRequestModel.cs" />
+    <Compile Include="Models\Questions\ListedQuestionResponseModel.cs" />
+    <Compile Include="Models\Questions\QuestionRequestModel.cs" />
     <Compile Include="Models\Users\RatingRequestModel.cs" />
     <Compile Include="Models\Users\UserResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -320,10 +321,10 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-<PropertyGroup>
-  <PostBuildEvent>
+  <PropertyGroup>
+    <PostBuildEvent>
      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"
   </PostBuildEvent>
-</PropertyGroup>
+  </PropertyGroup>
 </Project>

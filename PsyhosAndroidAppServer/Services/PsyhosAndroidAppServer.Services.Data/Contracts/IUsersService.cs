@@ -5,8 +5,6 @@
 
     public interface IUsersService
     {
-        IQueryable<User> GetByUserName(string username);
-
-      
+        IQueryable<User> GetByUserName(string username);     
     }
 }

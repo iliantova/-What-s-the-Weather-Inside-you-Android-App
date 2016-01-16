@@ -62,7 +62,7 @@ public class HtppServerResponseTask extends AsyncTask<String, Void, String[]> {
                 return null;
             }
 
-            byte[] postData = passedParams.getBytes(StandardCharsets.UTF_8);
+            byte[] postData = passedParams.toString().getBytes("UTF-8");
             int postDataLength = postData.length;
             String request = API_KEY;
             URL url  = new URL(request);

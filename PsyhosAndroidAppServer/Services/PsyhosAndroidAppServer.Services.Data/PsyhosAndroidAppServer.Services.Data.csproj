@@ -57,12 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommentsService.cs" />
-    <Compile Include="Contracts\ICommentsService.cs" />
-    <Compile Include="Contracts\IRealEstatesService.cs" />
+    <Compile Include="AnswerService.cs" />
+    <Compile Include="Contracts\IAnswerService.cs" />
+    <Compile Include="ResultService.cs" />
+    <Compile Include="Contracts\IResultService.cs" />
+    <Compile Include="Contracts\IQuestionService.cs" />
     <Compile Include="Contracts\IUsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RealEstatesService.cs" />
+    <Compile Include="QuestionService.cs" />
     <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>

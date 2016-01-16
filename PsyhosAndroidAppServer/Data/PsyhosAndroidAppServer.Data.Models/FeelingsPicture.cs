@@ -25,9 +25,5 @@
         public int ThoughtId { get; set; }
 
         public virtual Thought Thought { get; set; }
-
-        public string UserId { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

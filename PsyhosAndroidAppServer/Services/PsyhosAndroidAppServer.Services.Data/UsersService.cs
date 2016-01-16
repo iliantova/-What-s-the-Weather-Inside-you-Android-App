@@ -9,7 +9,6 @@
     public class UsersService : IUsersService
     {
         private readonly IRepository<User> users;
-        private readonly IRepository<Question> ratings;
 
         public UsersService(IRepository<User> users)
         {

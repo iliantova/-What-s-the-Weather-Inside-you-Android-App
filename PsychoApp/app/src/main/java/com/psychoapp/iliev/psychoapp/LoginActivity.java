@@ -92,7 +92,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
         _signupLink.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 // Start the Signup activity
@@ -100,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
+
         _googleLink.setSize(SignInButton.COLOR_AUTO);
         _googleLink.setScopes(gso.getScopeArray());
         _googleLink.setOnClickListener(new View.OnClickListener() {
@@ -152,12 +152,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         HtppServerResponseTask loginTask = new HtppServerResponseTask();
                         loginTask.execute(LOGIN_PARAMS, username, password);
 
-                        String status = loginTask.getStatus().toString();
-                        Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
-
                         onLoginSuccess();
-                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                        startActivityForResult(intent, REQUEST_SIGNUP);
+
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
@@ -167,12 +163,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
-            }
         }
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
@@ -190,8 +182,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void onLoginSuccess() {
+        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+        startActivityForResult(intent, REQUEST_SIGNUP);
         _loginButton.setEnabled(true);
-        finish();
+        this.finish();
     }
 
     public void onLoginFailed() {

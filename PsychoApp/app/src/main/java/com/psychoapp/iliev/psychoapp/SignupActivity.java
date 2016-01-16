@@ -110,8 +110,7 @@ public class SignupActivity extends AppCompatActivity {
 
         _btn_signup.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this, R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
@@ -121,20 +120,19 @@ public class SignupActivity extends AppCompatActivity {
         final String password = _et_input_password.getText().toString();
 
         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        HtppServerResponseTask registerTask = new HtppServerResponseTask();
-                        registerTask.execute(REGISTER_PARAMS, username, password, password, email);
+            new Runnable() {
+                public void run() {
+                    HtppServerResponseTask registerTask = new HtppServerResponseTask();
+                    registerTask.execute(REGISTER_PARAMS, username, password, password, email);
 
-                        onSignupSuccess();
-                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                        startActivity(intent);
+                    onSignupSuccess();
+                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                    startActivity(intent);
 
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+                    progressDialog.dismiss();
+                }
+            }, 3000);
     }
-
 
     public void onSignupSuccess() {
         _btn_signup.setEnabled(true);

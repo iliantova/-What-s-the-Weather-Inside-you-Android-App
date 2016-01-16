@@ -16,6 +16,8 @@ namespace PsyhosAndroidAppServer.Web.Api
         {
             AutoMapperConfig.RegisterMappings(Assemblies.WebApi);
 
+            DatabaseConfig.Initialize();
+
             ConfigureAuth(app);
 
             var httpConfig = new HttpConfiguration();
