@@ -52,7 +52,7 @@ public class CameraActivity extends AppCompatActivity {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             // this part to save captured image on provided path
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "my-photo.jpg");
+            File file = new File(Environment.getExternalStorageDirectory(), "my-psych-photo.jpg");
             Uri photoPath = Uri.fromFile(file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoPath);
 
@@ -69,7 +69,7 @@ public class CameraActivity extends AppCompatActivity {
             Bundle extras = intent.getExtras();
 
             // get bitmap
-            bitMap = (Bitmap) extras.get("data");
+            bitMap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT);
             _ivThumbnailPhoto.setImageBitmap(bitMap);
 
         }

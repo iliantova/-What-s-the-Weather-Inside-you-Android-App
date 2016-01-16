@@ -15,16 +15,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private static final String LOGIN_PARAMS = "LOGIN_PARAMS";
+
+    private GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 0;
 
     @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.input_username) EditText _username;
@@ -40,6 +48,19 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         BackGroundChanger.backgroundRandomizer(_background);
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         // use this for custom font importing to selected UI elements
         // fonts are situated in assets/fonts
@@ -81,9 +102,8 @@ public class LoginActivity extends AppCompatActivity {
         _googleLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO - attach the google login activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
 
@@ -123,9 +143,6 @@ public class LoginActivity extends AppCompatActivity {
         final String username = _username.getText().toString();
         final String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
-
-
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -134,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         String status = loginTask.getStatus().toString();
                         Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
-                        // On complete call either onLoginSuccess or onLoginFailed
+
                         onLoginSuccess();
                         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                         startActivityForResult(intent, REQUEST_SIGNUP);
@@ -154,6 +171,13 @@ public class LoginActivity extends AppCompatActivity {
                 this.finish();
             }
         }
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+            startActivityForResult(intent, RC_SIGN_IN);
+        }
     }
 
     @Override
@@ -169,7 +193,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
     }
 
@@ -194,5 +217,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }
