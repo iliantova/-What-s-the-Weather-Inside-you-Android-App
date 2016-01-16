@@ -10,8 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class ResultFragment extends Fragment {
+
+    @Bind(R.id.result_text) TextView _tv_result_text;
+    @Bind(R.id.result_think) TextView _tv_result_think;
 
     public ResultFragment() {
 
@@ -23,9 +28,11 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
         Context context = getActivity();
 
+        ButterKnife.bind(this, view);
+
         Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/simonettaitalic.ttf");
-        ((TextView) view.findViewById(R.id.result_text)).setTypeface(face);
-        ((TextView) view.findViewById(R.id.result_think)).setTypeface(face);
+        _tv_result_text.setTypeface(face);
+        _tv_result_think.setTypeface(face);
 
         return view;
     }

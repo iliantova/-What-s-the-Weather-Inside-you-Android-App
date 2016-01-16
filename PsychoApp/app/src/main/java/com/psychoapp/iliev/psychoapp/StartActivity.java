@@ -2,8 +2,6 @@ package com.psychoapp.iliev.psychoapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,10 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 
-import java.util.Random;
+import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,12 +22,16 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
     @Bind(R.id.fragment_start_conteiner) LinearLayout _ll_frag_start;
+    @Bind(R.id.toolbar) Toolbar _tb_toolbar;
+    @Bind(R.id.background_image) ProportionalImageView _pim_background_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
+
+        BackGroundChanger.backgroundRandomizer(_pim_background_image);
 
         Intent intent = getIntent();
         String fragmentName = intent.getStringExtra("fragment");
@@ -45,28 +46,8 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_start_conteiner, firstFragment).commit();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-       toolbar.setLogo(R.drawable.logo);
-
-        ProportionalImageView v = (ProportionalImageView) findViewById(R.id.background_image);
-        Random r = new Random();
-        int randomInt = r.nextInt(BACKGROUND_IMAGES_NUM);
-        int res;
-        switch (randomInt) {
-            case 0 : res = R.drawable.c; break;
-            case 1 : res = R.drawable.d; break;
-            case 2 : res = R.drawable.e; break;
-            case 3 : res = R.drawable.f; break;
-            case 4 : res = R.drawable.g; break;
-            case 5 : res = R.drawable.h; break;
-            case 6 : res = R.drawable.j; break;
-            case 7 : res = R.drawable.aquarell_night_400_655; break;
-            default: res = R.drawable.aquarell_night_400_655; break;
-        }
-        v.setBackgroundResource(res);
-
-
+        setSupportActionBar(_tb_toolbar);
+        _tb_toolbar.setLogo(R.drawable.logo);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

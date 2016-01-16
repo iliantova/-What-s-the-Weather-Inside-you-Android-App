@@ -1,4 +1,4 @@
-package com.psychoapp.iliev.psychoapp.dummy;
+package com.psychoapp.iliev.psychoapp.dummy.Helpers;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -9,10 +9,7 @@ import com.psychoapp.iliev.psychoapp.R;
 
 import java.util.Random;
 
-/**
- * Created by iliev on 1/11/2016.
- */
-public class Helpers {
+public class BackGroundChanger {
 
     private static final int BACKGROUND_IMAGES_NUM = 8;
 

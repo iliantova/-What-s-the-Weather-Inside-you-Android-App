@@ -2,11 +2,8 @@ package com.psychoapp.iliev.psychoapp;
 
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 
 import android.content.Intent;
@@ -18,24 +15,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.psychoapp.iliev.psychoapp.dummy.Helpers;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.RetreiveFeedTask;
-
-import java.util.Random;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HtppServerResponseTask;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private static final String LOGIN_PARAMS = "LOGIN_PARAMS";
+
+    private GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 0;
 
     @Bind(R.id.background_image) ProportionalImageView _background;
-    @Bind(R.id.input_email) EditText _emailText;
+    @Bind(R.id.input_username) EditText _username;
     @Bind(R.id.input_password) EditText _passwordText;
     @Bind(R.id.btn_login) Button _loginButton;
     @Bind(R.id.link_signup) TextView _signupLink;
-    @Bind(R.id.link_login_google) TextView _googleLink;
+    @Bind(R.id.link_login_google) SignInButton _googleLink;
+    @Bind((R.id.tv_or)) TextView _tv_or;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,33 +49,44 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        Helpers.backgroundRandomizer(_background);
+        BackGroundChanger.backgroundRandomizer(_background);
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         // use this for custom font importing to selected UI elements
         // fonts are situated in assets/fonts
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
-        _emailText.setTypeface(face);
-        _emailText.setTextSize(20);
+        _username.setTypeface(face);
+        _username.setTextSize(20);
         _passwordText.setTypeface(face);
         _passwordText.setTextSize(20);
         _loginButton.setTypeface(face);
         _loginButton.setTextSize(24);
         _signupLink.setTypeface(face);
         _signupLink.setTextSize(20);
-        _googleLink.setTypeface(face);
-        _googleLink.setTextSize(20);
+        _tv_or.setTypeface(face);
+        _tv_or.setTextSize(12);
 
-        _emailText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+        _username.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _passwordText.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _loginButton.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _signupLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
-        _googleLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
+//        _googleLink.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 login();
             }
         });
@@ -83,13 +100,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
-
+        _googleLink.setSize(SignInButton.COLOR_AUTO);
+        _googleLink.setScopes(gso.getScopeArray());
         _googleLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO - attach the google login activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
 
@@ -126,20 +143,18 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        final String email = _emailText.getText().toString();
+        final String username = _username.getText().toString();
         final String password = _passwordText.getText().toString();
-
-        // TODO: Implement your own authentication logic here.
-
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        RetreiveFeedTask lregisterTask = new RetreiveFeedTask();
-                        lregisterTask.execute("MAIMUNA");
-                        String status = lregisterTask.getStatus().toString();
+                        HtppServerResponseTask loginTask = new HtppServerResponseTask();
+                        loginTask.execute(LOGIN_PARAMS, username, password);
+
+                        String status = loginTask.getStatus().toString();
                         Toast.makeText(getBaseContext(), status, Toast.LENGTH_LONG).show();
-                        // On complete call either onLoginSuccess or onLoginFailed
+
                         onLoginSuccess();
                         Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                         startActivityForResult(intent, REQUEST_SIGNUP);
@@ -159,6 +174,13 @@ public class LoginActivity extends AppCompatActivity {
                 this.finish();
             }
         }
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+            startActivityForResult(intent, RC_SIGN_IN);
+        }
     }
 
     @Override
@@ -174,24 +196,23 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
     }
 
     public boolean validate() {
         boolean valid = true;
 
-        String email = _emailText.getText().toString();
+        String username = _username.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+        if (username.isEmpty() || username.length() < 2 || username.length() > 50) {
+            _username.setError("enter a valid username");
             valid = false;
         } else {
-            _emailText.setError(null);
+            _username.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+        if (password.isEmpty() || password.length() < 4 || password.length() > 20) {
             _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
@@ -199,5 +220,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }

@@ -8,14 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 
 import java.io.File;
 import java.util.List;
@@ -27,6 +25,7 @@ public class CameraActivity extends AppCompatActivity {
 
     @Bind(R.id.btnTakePic) Button _btn_take_pic;
     @Bind(R.id.ivThumbnailPhoto) ImageView _ivThumbnailPhoto;
+    @Bind(R.id.background_image) ProportionalImageView _background;
 
     Bitmap bitMap;
     static int TAKE_PICTURE = 1;
@@ -37,8 +36,7 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ButterKnife.bind(this);
 
-        // Get reference to views
-        _ivThumbnailPhoto = (ImageView) findViewById(R.id.ivThumbnailPhoto);
+        BackGroundChanger.backgroundRandomizer(_background);
 
         // add onclick listener to the button
         _btn_take_pic.setOnClickListener(cameraAction);
@@ -54,8 +52,7 @@ public class CameraActivity extends AppCompatActivity {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
             // this part to save captured image on provided path
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
-                    "my-photo.jpg");
+            File file = new File(Environment.getExternalStorageDirectory(), "my-psych-photo.jpg");
             Uri photoPath = Uri.fromFile(file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoPath);
 
@@ -72,7 +69,7 @@ public class CameraActivity extends AppCompatActivity {
             Bundle extras = intent.getExtras();
 
             // get bitmap
-            bitMap = (Bitmap) extras.get("data");
+            bitMap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT);
             _ivThumbnailPhoto.setImageBitmap(bitMap);
 
         }
