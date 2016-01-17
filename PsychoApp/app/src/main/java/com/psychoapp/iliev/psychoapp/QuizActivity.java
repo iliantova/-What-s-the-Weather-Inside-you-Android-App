@@ -1,23 +1,14 @@
 package com.psychoapp.iliev.psychoapp;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
-import com.psychoapp.iliev.psychoapp.dummy.Helpers.DataParser;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,8 +17,11 @@ public class QuizActivity extends FragmentActivity {
 
     QuizQuestionsPagerAdapter mQuizQuestionsPagerAdapter;
 
+    public int currentScore;
+
     @Bind(R.id.background_image) ProportionalImageView _background;
-    @Bind(R.id.pager) ViewPager _viewPager;
+    @Bind(R.id.pager)
+    ViewPager _viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +53,7 @@ public class QuizActivity extends FragmentActivity {
             Bundle args = new Bundle();
 
             // here we shoulld pass the questions and answers from the server (instead of i)
-            args.putInt(QuizActivityFragment.ARG_OBJECT, position ); // Our object is just an integer :-P
+            args.putInt(QuizActivityFragment.ARG_OBJECT, position + 1); // Our object is just an integer :-P
             fragment.setArguments(args);
 
             return fragment;

@@ -1,18 +1,13 @@
 package com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers;
 
 import android.annotation.TargetApi;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.DataParser;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -21,11 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>> {
 
@@ -40,6 +32,10 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
     private final String API_URL_register = "http://psyhosgit.apphb.com/api/Account/Register";
     private final String API_URL_token = "http://psyhosgit.apphb.com/token";
     private final String API_URL_questions_getTenRandom = "http://psyhosgit.apphb.com/api/Questions";
+
+    private final String LOGIN_PARAMS = "LOGIN_PARAMS";
+    private final String REGISTER_PARAMS = "REGISTER_PARAMS";
+    private final String GET_10_QUESTIONS_PARAMS = "QUESTIONS_10_RANDOM_PARAMS";
 
     protected void onPreExecute() {
     }
@@ -68,7 +64,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
         String responseJsonStr;
 
         try {
-            if (urls[0].equals("LOGIN_PARAMS")) {
+            if (urls[0].equals(LOGIN_PARAMS)) {
                 // sample code for passing login body parameters
                 passedParams  =
                         "Username="+urls[1]
@@ -78,7 +74,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
                 HTTP_METHOD = HTTP_POST_METHOD;
                 CONTENT_TYPE = CONTENT_TYPE_X_FORM;
 
-            } else if (urls[0].equals("REGISTER_PARAMS")) {
+            } else if (urls[0].equals(REGISTER_PARAMS)) {
                 passedParams  =
                         "Username="+urls[1]
                         +"&Password="+urls[2]
@@ -88,7 +84,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
                 HTTP_METHOD = HTTP_POST_METHOD;
                 CONTENT_TYPE = CONTENT_TYPE_X_FORM;
 
-            } else if (urls[0].equals("QUESTIONS_10_RANDOM_PARAMS")) {
+            } else if (urls[0].equals(GET_10_QUESTIONS_PARAMS)) {
                 API_KEY = API_URL_questions_getTenRandom;
                 HTTP_METHOD = HTTP_GET_METHOD;
                 CONTENT_TYPE = CONTENT_TYPE_JSON;
@@ -175,12 +171,15 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
         }
 
         // data parser follows here
-        if (urls[0].equals("QUESTIONS_10_RANDOM_PARAMS")) {
+        if (urls[0].equals(GET_10_QUESTIONS_PARAMS)) {
             try {
                 result = DataParser.getQuestionsFromJsonString(responseJsonStr, 10);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        } else if (urls[0].equals(LOGIN_PARAMS) || urls[0].equals(REGISTER_PARAMS)) {
+            // TODO add dataParser here
+            result.add(responseJsonStr);
         }
 
         return result;

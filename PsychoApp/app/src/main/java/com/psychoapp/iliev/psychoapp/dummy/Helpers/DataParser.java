@@ -27,19 +27,18 @@ public class DataParser {
                 String question = questionJson.getString("Text");
                 questionsArray.add(question);
 
-                Log.e("=========", questionsArray.get(i));
-
                 JSONArray answersJsonArr = questionJson.getJSONArray("Answers");
                 for (int y = 0; y < answersJsonArr.length(); y++) {
                     JSONObject answerJson = answersJsonArr.getJSONObject(y);
-                    String an = answerJson.getString("Text");
-                    questionsArray.add(an);
+                    String answerText = answerJson.getString("Text");
+                    String answerValue = answerJson.getString("Value");
+                    questionsArray.add(answerText);
+                    questionsArray.add(answerValue);
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         return questionsArray;
     }

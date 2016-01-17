@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-                    Log.e("Success Login RES : ", res.get(1));
+                    Log.e("Success Login RES : ", res.get(0));
 
                     Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                     startActivityForResult(intent, REQUEST_SIGNUP);

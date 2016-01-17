@@ -1,10 +1,12 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,9 @@ public class ResultFragment extends Fragment {
         Context context = getActivity();
 
         ButterKnife.bind(this, view);
+
+        String finalScore = getActivity().getIntent().getExtras().getString("score");
+        Log.e("FINAL SCORE", finalScore);
 
         Typeface face= Typeface.createFromAsset(context.getAssets(), "fonts/simonettaitalic.ttf");
         _tv_result_text.setTypeface(face);

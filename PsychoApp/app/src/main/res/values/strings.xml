@@ -1,4 +1,8 @@
 <resources>
+
+    <item type="id" name="TAG_BTN_VALUE"/>
+    <item type="id" name="TAG_CURRENT_SCORE"/>
+
     <string name="app_name"></string>
 
     <string name="action_login">Sign In</string>
