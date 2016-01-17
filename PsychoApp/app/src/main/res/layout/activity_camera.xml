@@ -1,49 +1,29 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/base_layout_match"
     tools:context=".activities.CameraActivity">
 
     <com.psychoapp.iliev.psychoapp.customs.ProportionalImageView
         android:id="@+id/background_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:alpha="0.7" />
+        style="@style/pim_background" />
 
     <LinearLayout
         android:id="@+id/ll_question_form"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fitsSystemWindows="true">
+        style="@style/ll_login_base">
 
         <LinearLayout
             android:id="@+id/ll_quiz_form"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="24dp"
-            android:alpha="0.7"
-            android:background="@drawable/background_with_shadow"
-            android:orientation="vertical"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="18dp">
+            style="@style/ll_secondary">
 
             <ImageView
                 android:id="@+id/ivThumbnailPhoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/mostlycloudypaint" />
+                android:src="@drawable/mostlycloudypaint"
+                style="@style/iv_thumb_camera" />
 
             <Button
                 android:id="@+id/btnTakePic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Take a Picture" />
+                android:text="Take a Picture"
+                style="@style/btn_base_center" />
 
         </LinearLayout>
 

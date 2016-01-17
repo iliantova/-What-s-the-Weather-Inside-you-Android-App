@@ -1,46 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_frame"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/base_layout_match">
 
     <com.psychoapp.iliev.psychoapp.customs.ProportionalImageView
         android:id="@+id/background_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true" />
+        style="@style/pim_background_bounds" />
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fitsSystemWindows="true">
+        style="@style/sv_center_bound">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="24dp"
-            android:alpha="0.7"
-            android:background="@drawable/background_with_shadow"
-            android:orientation="vertical"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="18dp">
+        <LinearLayout style="@style/ll_cent_vert">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="12dp"
-                android:src="@drawable/mostlycloudypaint" />
+                android:src="@drawable/mostlycloudypaint"
+                style="@style/iv_cent_hori_wrap" />
 
             <!--  Username Label -->
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+            <android.support.design.widget.TextInputLayout style="@style/til_eightdp">
 
                 <EditText
                     android:id="@+id/input_username"
@@ -54,19 +31,12 @@
 
             <!--  Password Label -->
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                style="@style/til_eightdp">
 
                 <EditText
                     android:id="@+id/input_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:hint="Password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white" />
+                    style="@style/et_pass" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton

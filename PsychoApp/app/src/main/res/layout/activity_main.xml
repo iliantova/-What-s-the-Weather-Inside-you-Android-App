@@ -2,27 +2,19 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    style="@style/coord_widget"
     tools:context=".activities.MainActivity">
 
     <FrameLayout
         android:id="@+id/main_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/fl_base_match">
 
         <com.psychoapp.iliev.psychoapp.customs.ProportionalImageView
             android:id="@+id/background_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:alpha="0.7" />
+            style="@style/pim_background" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/ll_base_vertical">
 
             <include layout="@layout/content_main" />
 

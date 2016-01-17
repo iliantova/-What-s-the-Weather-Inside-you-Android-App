@@ -2,16 +2,12 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".activities.StartActivity">
+    tools:context=".activities.StartActivity"
+    style="@style/coord_widget">
 
     <com.psychoapp.iliev.psychoapp.customs.ProportionalImageView
         android:id="@+id/background_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
+        style="@style/pim_background_bounds"
         android:alpha="0.7" />
 
     <android.support.design.widget.AppBarLayout
@@ -21,19 +17,13 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:alpha="0.8"
-            android:background="@color/themeDirtyWhite"
-            android:minHeight="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            style="@style/toolbar_widget" />
 
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        style="@style/ll_base_vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,9 +34,7 @@
 
         <LinearLayout
             android:id="@+id/fragment_start_conteiner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/ll_base_vertical">
 
         </LinearLayout>
     </LinearLayout>

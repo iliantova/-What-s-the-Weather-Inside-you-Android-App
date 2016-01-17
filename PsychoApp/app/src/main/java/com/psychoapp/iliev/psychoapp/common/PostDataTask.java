@@ -1,6 +1,5 @@
 package com.psychoapp.iliev.psychoapp.common;
 
-
 import java.io.IOException;
 
 import okhttp3.MediaType;
