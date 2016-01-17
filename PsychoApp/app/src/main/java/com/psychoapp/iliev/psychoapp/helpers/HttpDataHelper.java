@@ -37,8 +37,7 @@ public class HttpDataHelper extends AsyncTask<String, Void, List<String>> {
 
     protected void onPreExecute() {
     }
-
-    @TargetApi(Build.VERSION_CODES.KITKAT)
+    
     protected List<String> doInBackground(String... urls) {
 
         List<String> result = new ArrayList<String>();
