@@ -60,7 +60,29 @@ public class MainActivityFragment extends Fragment {
                     }
                 });
 
+        final GestureDetector gesturetap = new GestureDetector(getActivity(),
+                new GestureDetector.SimpleOnGestureListener() {
 
+                    @Override
+                    public boolean onDown(MotionEvent e) {
+                        Toast.makeText(getContext(), "on Activity Down", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onDoubleTap(MotionEvent e) {
+
+                        Toast.makeText(getContext(),
+                                "IMa event da ne powqrwash",
+                                Toast.LENGTH_SHORT).show();
+
+                        LinearLayout listViewtext = (LinearLayout) view.findViewById(R.id.info_text);
+                        listViewtext.setVisibility(View.GONE);
+
+                        return super.onDoubleTap(e);
+                    }
+                });
 
         listViewtext.setVisibility(View.GONE);
 
@@ -73,7 +95,12 @@ public class MainActivityFragment extends Fragment {
                 return gesture.onTouchEvent(event);
             }
         });
-
+        listViewtext.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gesturetap.onTouchEvent(event);
+            }
+        });
 
 
         //gestureDetector = new GestureDetector(getContext(),getListViewOnTouchListener());
