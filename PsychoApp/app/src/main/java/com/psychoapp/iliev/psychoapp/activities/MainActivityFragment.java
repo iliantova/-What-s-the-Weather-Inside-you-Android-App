@@ -47,19 +47,13 @@ public class MainActivityFragment extends Fragment {
 
                     @Override
                     public boolean onDown(MotionEvent e) {
-                        Toast.makeText(getContext(), "on Activity Down", Toast.LENGTH_SHORT).show();
-
                         return true;
                     }
 
                     @Override
                     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-                        Toast.makeText(getContext(),
-                                "IMa event da ne powqrwash",
-                                Toast.LENGTH_SHORT).show();
-
-                        Animation slidedown = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+                        Animation slidedown = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in_faster);
 
                         slidedown.setAnimationListener(new Animation.AnimationListener() {
                             @Override
@@ -79,7 +73,6 @@ public class MainActivityFragment extends Fragment {
 
                         _infoText.startAnimation(slidedown);
 
-
                         _infoText.setVisibility(View.VISIBLE);
                         _infoShowAndHide.setVisibility(View.GONE);
 
@@ -92,18 +85,13 @@ public class MainActivityFragment extends Fragment {
 
                     @Override
                     public boolean onDown(MotionEvent e) {
-                        Toast.makeText(getContext(), "on Activity Down", Toast.LENGTH_SHORT).show();
-
                         return true;
                     }
 
                     @Override
                     public boolean onDoubleTap(MotionEvent e) {
 
-                        Toast.makeText(getContext(),
-                                "IMa event da ne powqrwash",
-                                Toast.LENGTH_SHORT).show();
-                        Animation fadeout = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
+                        Animation fadeout = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out_faster);
 
                         fadeout.setAnimationListener(new Animation.AnimationListener() {
                             @Override
@@ -112,12 +100,10 @@ public class MainActivityFragment extends Fragment {
 
                             @Override
                             public void onAnimationEnd(Animation animation) {
-
                             }
 
                             @Override
                             public void onAnimationRepeat(Animation animation) {
-
                             }
                         });
 
@@ -133,8 +119,6 @@ public class MainActivityFragment extends Fragment {
 
         _infoText.setVisibility(View.GONE);
 
-        //LinearLayout listView = (LinearLayout) view.findViewById(R.id.info_drag);
-
 
         _infoShowAndHide.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -149,9 +133,6 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-
-        //gestureDetector = new GestureDetector(getContext(),getListViewOnTouchListener());
         return view;
     }
-
 }

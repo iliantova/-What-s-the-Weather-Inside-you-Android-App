@@ -44,9 +44,6 @@ public class StartActivityFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        Toast.makeText(getContext(),
-                "rabotq",
-                Toast.LENGTH_SHORT).show();
 
         Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/simonettaitalic.ttf");
         ((TextView) _calendarButtonText).setTypeface(face);
@@ -54,43 +51,24 @@ public class StartActivityFragment extends Fragment {
         ((TextView) _chartButtonText).setTypeface(face);
         ((TextView) _lastResultButtonText).setTypeface(face);
 
-//        LinearLayout calendarButton = (LinearLayout) view.findViewById(R.id.calendar_button);
-//        calendarButton.setOnClickListener(new OnClickListener() {
-//            public void onClick(View v) {
-//                Fragment fragment = new StartActivityFragment();
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment, fragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//            }
-//        });
-
         View.OnClickListener skipFrag = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int curentId = v.getId();
                 if (curentId == _calendarButton.getId()) {
-                    Toast.makeText(getContext(),
-                            "This is a message displayed in a Toast",
-                            Toast.LENGTH_SHORT).show();
+
                 } else if (curentId == _quizButton.getId()) {
                     Intent intent = new Intent(getActivity(), QuizActivity.class);
                     startActivity(intent);
 
                 } else if (curentId == _chartButton.getId()) {
-                    Toast.makeText(getContext(),
-                            "_chartButton",
-                            Toast.LENGTH_SHORT).show();
+
                     try {
                         PostDataTask.main();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else if (curentId == _lastResultButton.getId()) {
-                    Toast.makeText(getContext(),
-                            "_lastResultButton",
-                            Toast.LENGTH_SHORT).show();
 
                     showOtherFragment();
                 }

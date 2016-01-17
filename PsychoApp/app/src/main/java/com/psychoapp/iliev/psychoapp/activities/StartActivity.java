@@ -73,7 +73,6 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
     @Override
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        ;
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_start_conteiner, fragment, DETAILFRAGMENT_TAG);
         fragmentTransaction.addToBackStack(fragment.toString());
