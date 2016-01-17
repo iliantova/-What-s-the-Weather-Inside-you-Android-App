@@ -52,5 +52,28 @@
        android:adjustViewBounds="true"
        android:layout_marginLeft="3dp"
        android:src="@drawable/mostlycloudypaint"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/info_drag"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INFO"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/info_text"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INFO mnofofoo jdksjdksdnd sdjskdjksd s dsldsdkjaskd sd skldjaskdas cskdjsk sd sndskdnskc"/>
+
+    </LinearLayout>
 </LinearLayout>
 
