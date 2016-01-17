@@ -44,9 +44,6 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
     protected List<String> doInBackground(String... urls) {
 
         List<String> result = new ArrayList<String>();
-        String response = null;
-
-        // Do some validation here
 
         HttpURLConnection urlConnection = null;
 
@@ -110,7 +107,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
             urlConnection.setInstanceFollowRedirects(false);
             urlConnection.setRequestMethod(HTTP_METHOD);
 
-            // if method is GEt then add autorization header
+            // if method is GET then add autorization header
             if(HTTP_METHOD.equals(HTTP_GET_METHOD)) {
                 urlConnection.setRequestProperty("Authorization", urls[1]);
             }
@@ -177,9 +174,13 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        } else if (urls[0].equals(LOGIN_PARAMS) || urls[0].equals(REGISTER_PARAMS)) {
+        } else if (urls[0].equals(LOGIN_PARAMS)) {
             // TODO add dataParser here
-            result.add(responseJsonStr);
+            try {
+                result = DataParser.getAuthenticatedUserInformation(responseJsonStr);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         return result;

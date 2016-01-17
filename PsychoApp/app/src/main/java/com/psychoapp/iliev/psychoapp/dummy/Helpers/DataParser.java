@@ -22,7 +22,7 @@ public class DataParser {
         JSONArray rootJson = null;
         try {
             rootJson = new JSONArray(questionsJsonStr);
-            for (int i = 0; i < rootJson.length(); i++) {
+            for (int i = 0; i < numQuestions; i++) {
                 JSONObject questionJson = rootJson.getJSONObject(i);
                 String question = questionJson.getString("Text");
                 questionsArray.add(question);
@@ -41,5 +41,28 @@ public class DataParser {
         }
 
         return questionsArray;
+    }
+
+    public static List<String> getAuthenticatedUserInformation(String questionsJsonStr)
+            throws JSONException {
+
+        List<String> userInfo = new ArrayList<String>();
+
+        JSONObject rootJson = null;
+        try {
+            rootJson = new JSONObject(questionsJsonStr);
+
+            String token = rootJson.getString("access_token");
+            String tokenType = rootJson.getString("token_type");
+            String username = rootJson.getString("userName");
+            userInfo.add(token);
+            userInfo.add(tokenType);
+            userInfo.add(username);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return userInfo;
     }
 }

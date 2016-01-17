@@ -1,6 +1,8 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,16 +26,27 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
 
+import static android.app.PendingIntent.getActivity;
+
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     private static final String LOGIN_PARAMS = "LOGIN_PARAMS";
+    public static final String USER_PREFERENCES = "userPreferences";
+    public static final String TOKEN = "token";
+    public static final String USERNAME = "username";
+
+    SharedPreferences sharedpreferences;
+
+    public static List<String> responseData = new ArrayList<String>();
 
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 0;
@@ -155,15 +168,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     loginTask.execute(LOGIN_PARAMS, username, password);
 
                     // this try/catch will get the response result with get()
-                    List<String> res = null;
                     try {
-                        res = loginTask.get();
+                        responseData = loginTask.get();
+
+                        sharedpreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString(TOKEN, responseData.get(0));
+                        editor.putString(USERNAME, responseData.get(1));
+                        editor.commit();
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-                    Log.e("Success Login RES : ", res.get(0));
 
                     Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                     startActivityForResult(intent, REQUEST_SIGNUP);
@@ -199,6 +217,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+
         this.finish();
     }
 

@@ -43,7 +43,6 @@ public class CameraActivity extends AppCompatActivity {
         _btn_take_pic.setOnClickListener(cameraAction);
     }
 
-
     View.OnClickListener cameraAction = new View.OnClickListener() {
         // on button "btnTackPic" is clicked
         @Override
@@ -70,7 +69,7 @@ public class CameraActivity extends AppCompatActivity {
             Bundle extras = intent.getExtras();
 
             // get bitmap
-            bitMap = (Bitmap) extras.get(MediaStore.EXTRA_OUTPUT);
+            bitMap = (Bitmap) extras.get("data");
             _ivThumbnailPhoto.setImageBitmap(bitMap);
 
         }

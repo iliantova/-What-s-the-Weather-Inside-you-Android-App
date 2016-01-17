@@ -1,7 +1,9 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,10 @@ import butterknife.ButterKnife;
 public class QuizActivityFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
+    public static final String USER_PREFERENCES = "userPreferences";
+    public static final String TOKEN = "token";
+    public static final String USERNAME = "username";
+
     public static List<String> responseData = new ArrayList<String>();
 
     @Bind(R.id.btn_answeroption_1) AppCompatButton _btn_option_1;
