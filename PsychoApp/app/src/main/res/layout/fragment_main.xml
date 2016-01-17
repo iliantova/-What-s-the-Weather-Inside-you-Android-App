@@ -6,74 +6,87 @@
    android:orientation="vertical"
    tools:context="com.psychoapp.iliev.psychoapp.MainActivityFragment"
    tools:showIn="@layout/activity_main">
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal" >
-       <Button
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/action_login"
-           android:text="@string/action_login"
-           android:background="@android:color/transparent"
-           android:textColor="@color/white"
-           android:textSize="18sp"
-           android:onClick="navigateToFragment"
-           android:layout_marginRight="12sp"/>
-       <Button
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/action_quiz"
-           android:text="@string/action_quiz"
-           android:background="@android:color/transparent"
-           android:textColor="@color/white"
-           android:textSize="18sp"/>
-       <Button
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/action_camera"
-           android:text="@string/action_camera"
-           android:background="@android:color/transparent"
-           android:textColor="@color/white"
-           android:textSize="18sp"/>
-   </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-   <ImageView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:adjustViewBounds="true"
-       android:scaleType="fitCenter"
-       android:layout_marginTop="40dp"
-       android:src="@drawable/flag"/>
 
-   <ImageView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:adjustViewBounds="true"
-       android:layout_marginLeft="3dp"
-       android:src="@drawable/mostlycloudypaint"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/info_drag"
-        android:orientation="vertical">
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="left|bottom">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal" >
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/action_login"
+               android:text="@string/action_login"
+               android:background="@android:color/transparent"
+               android:textColor="@color/white"
+               android:textSize="18sp"
+               android:onClick="navigateToFragment"
+               android:layout_marginRight="12sp"/>
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/action_quiz"
+               android:text="@string/action_quiz"
+               android:background="@android:color/transparent"
+               android:textColor="@color/white"
+               android:textSize="18sp"/>
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/action_camera"
+               android:text="@string/action_camera"
+               android:background="@android:color/transparent"
+               android:textColor="@color/white"
+               android:textSize="18sp"/>
+       </LinearLayout>
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:adjustViewBounds="true"
+           android:scaleType="fitCenter"
+           android:layout_marginTop="40dp"
+           android:src="@drawable/flag"/>
+
+
+        <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:adjustViewBounds="true"
+           android:layout_marginLeft="3dp"
+           android:src="@drawable/mostlycloudypaint"/>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="INFO"/>
+            android:id="@+id/info_drag"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INFO"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/info_text"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="INFO mnofofoo jdksjdksdnd sdjskdjksd s dsldsdkjaskd sd skldjaskdas cskdjsk sd sndskdnskc"/>
-
-    </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="265dp"
+            android:layout_height="279dp"
+            android:id="@+id/info_text"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INFO mnofofoo jdksjdksdnd sdjskdjksd s dsldsdkjaskd sd skldjaskdas cskdjsk sd sndskdnskc"/>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
 
