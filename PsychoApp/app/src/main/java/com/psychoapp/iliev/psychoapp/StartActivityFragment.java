@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,6 +61,7 @@ public class StartActivityFragment extends Fragment {
         ((TextView) _chartButtonText).setTypeface(face);
         ((TextView) _lastResultButtonText).setTypeface(face);
 
+
 //        LinearLayout calendarButton = (LinearLayout) view.findViewById(R.id.calendar_button);
 //        calendarButton.setOnClickListener(new OnClickListener() {
 //            public void onClick(View v) {
@@ -100,6 +104,7 @@ public class StartActivityFragment extends Fragment {
                     Toast.makeText(getContext(),
                             "_lastResultButton",
                             Toast.LENGTH_SHORT).show();
+
                     showOtherFragment();
                 }
             }

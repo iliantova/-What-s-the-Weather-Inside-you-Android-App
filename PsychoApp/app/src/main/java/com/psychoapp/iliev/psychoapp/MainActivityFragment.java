@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -67,6 +69,27 @@ public class MainActivityFragment extends Fragment {
                                 "IMa event da ne powqrwash",
                                 Toast.LENGTH_SHORT).show();
 
+                        Animation slidedown = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+
+                        slidedown.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+
+                            }
+                        });
+
+                        _infoText.startAnimation(slidedown);
+
+
                         _infoText.setVisibility(View.VISIBLE);
                         _infoShowAndHide.setVisibility(View.GONE);
 
@@ -90,9 +113,29 @@ public class MainActivityFragment extends Fragment {
                         Toast.makeText(getContext(),
                                 "IMa event da ne powqrwash",
                                 Toast.LENGTH_SHORT).show();
+                        Animation fadeout = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
+
+                        fadeout.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+
+                            }
+                        });
+
+                        _infoText.startAnimation(fadeout);
 
                         _infoText.setVisibility(View.GONE);
                         _infoShowAndHide.setVisibility(View.VISIBLE);
+
 
                         return super.onDoubleTap(e);
                     }
