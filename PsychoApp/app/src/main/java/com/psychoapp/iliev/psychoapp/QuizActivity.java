@@ -1,12 +1,15 @@
 package com.psychoapp.iliev.psychoapp;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 
@@ -15,9 +18,14 @@ import butterknife.ButterKnife;
 
 public class QuizActivity extends FragmentActivity {
 
+    public static final String USER_PREFERENCES = "userPreferences";
+    public static final String TOKEN = "token";
+    public static final String USERNAME = "username";
+
     QuizQuestionsPagerAdapter mQuizQuestionsPagerAdapter;
 
     public int currentScore;
+    public String usertkn;
 
     @Bind(R.id.background_image) ProportionalImageView _background;
     @Bind(R.id.pager)
@@ -31,6 +39,9 @@ public class QuizActivity extends FragmentActivity {
         ButterKnife.bind(this);
 
         BackGroundChanger.backgroundRandomizer(_background);
+
+        SharedPreferences prefs = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        usertkn = prefs.getString(TOKEN, null);
 
         // Create an adapter that when requested, will return a fragment representing an object in the collection.
         // ViewPager and its adapters use support library fragments, so we must use getSupportFragmentManager.
@@ -52,8 +63,7 @@ public class QuizActivity extends FragmentActivity {
             Fragment fragment = new QuizActivityFragment();
             Bundle args = new Bundle();
 
-            // here we shoulld pass the questions and answers from the server (instead of i)
-            args.putInt(QuizActivityFragment.ARG_OBJECT, position + 1); // Our object is just an integer :-P
+            args.putInt(QuizActivityFragment.ARG_OBJECT, position + 1);
             fragment.setArguments(args);
 
             return fragment;
