@@ -1,5 +1,6 @@
 package com.psychoapp.iliev.psychoapp;
 
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class MainActivityFragment extends Fragment {
     @Bind(R.id.info_drag) LinearLayout _infoShowAndHide;
     @Bind(R.id.info_text) LinearLayout _infoText;
 
+    @Bind(R.id.info_drag_text) TextView _infoShowAndHideText;
+    @Bind(R.id.info_text_text) TextView _infoTextText;
+
     public MainActivityFragment() {
     }
 
@@ -37,7 +42,13 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+
         ButterKnife.bind(this, view);
+
+    Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
+       ((TextView) _infoTextText).setTypeface(face);
+    ((TextView) _infoShowAndHideText).setTypeface(face);
+
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
@@ -57,6 +68,7 @@ public class MainActivityFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
 
                         _infoText.setVisibility(View.VISIBLE);
+                        _infoShowAndHide.setVisibility(View.GONE);
 
                         return super.onFling(e1, e2, velocityX, velocityY);
                     }
@@ -80,6 +92,7 @@ public class MainActivityFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
 
                         _infoText.setVisibility(View.GONE);
+                        _infoShowAndHide.setVisibility(View.VISIBLE);
 
                         return super.onDoubleTap(e);
                     }

@@ -68,11 +68,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/info_drag"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:alpha="0.5"
+            android:background="@drawable/background_with_shadow">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INFO"/>
+                android:id="@+id/info_drag_text"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="SWIPE FOR MORE INFO"/>
 
         </LinearLayout>
         </LinearLayout>
@@ -81,10 +87,14 @@
             android:layout_height="279dp"
             android:id="@+id/info_text"
             android:orientation="vertical"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:alpha="0.7"
+            android:background="@drawable/background_with_shadow">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/info_text_text"
+                android:textColor="@color/white"
                 android:text="INFO mnofofoo jdksjdksdnd sdjskdjksd s dsldsdkjaskd sd skldjaskdas cskdjsk sd sndskdnskc"/>
         </LinearLayout>
     </FrameLayout>
