@@ -24,6 +24,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
 import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
@@ -154,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     loginTask.execute(LOGIN_PARAMS, username, password);
 
                     // this try/catch will get the response result with get()
-                    String[] res = null;
+                    List<String> res = null;
                     try {
                         res = loginTask.get();
                     } catch (InterruptedException e) {
@@ -162,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-                    Log.e("Success Login RES : ", res[1]);
+                    Log.e("Success Login RES : ", res.get(1));
 
                     Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                     startActivityForResult(intent, REQUEST_SIGNUP);

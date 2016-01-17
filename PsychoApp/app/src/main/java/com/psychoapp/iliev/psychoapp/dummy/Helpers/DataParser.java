@@ -8,33 +8,39 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataParser {
     private static final String LOG_TAG = DataParser.class.getSimpleName();
 
-    /**
-     * Take the String representing the complete forecast in JSON Format and
-     * pull out the data we need to construct the Strings needed for the wireframes.
-     *
-     * Fortunately parsing is easy:  constructor takes the JSON string and converts it
-     * into an Object hierarchy for us.
-     */
-    public static String getQuestionsFromJsonString(String questionsJsonStr, int numQuestions)
+    public static List<String> getQuestionsFromJsonString(String questionsJsonStr, int numQuestions)
             throws JSONException {
 
-        // These are the names of the JSON objects that need to be extracted.
-        final String QUIZ_QUESTION_TEXT = "Text";
+        List<String> questionsArray = new ArrayList<String>();
 
-        JSONObject rootJsonObj = new JSONObject(questionsJsonStr);
-        JSONArray questionsJsonArray = rootJsonObj.getJSONArray(QUIZ_QUESTION_TEXT);
+        JSONArray rootJson = null;
+        try {
+            rootJson = new JSONArray(questionsJsonStr);
+            for (int i = 0; i < rootJson.length(); i++) {
+                JSONObject questionJson = rootJson.getJSONObject(i);
+                String question = questionJson.getString("Text");
+                questionsArray.add(question);
 
-//        String[] resultStrs = new String[numQuestions];
-//        for(int i = 0; i < numQuestions; i++) {
-//
-//            g
-//        }
+                Log.e("=========", questionsArray.get(i));
 
-        return rootJsonObj.toString();
+                JSONArray answersJsonArr = questionJson.getJSONArray("Answers");
+                for (int y = 0; y < answersJsonArr.length(); y++) {
+                    JSONObject answerJson = answersJsonArr.getJSONObject(y);
+                    String an = answerJson.getString("Text");
+                    questionsArray.add(an);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+
+        return questionsArray;
     }
 }

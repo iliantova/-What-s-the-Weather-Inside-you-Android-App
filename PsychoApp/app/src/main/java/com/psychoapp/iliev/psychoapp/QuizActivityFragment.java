@@ -1,23 +1,39 @@
 package com.psychoapp.iliev.psychoapp;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.psychoapp.iliev.psychoapp.dummy.Helpers.DataParser;
+import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
+
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Handler;
 
 import butterknife.Bind;
@@ -26,8 +42,10 @@ import butterknife.ButterKnife;
 public class QuizActivityFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
-    public static final List<String> answersList = new ArrayList<String>();
-    public static final List<String> questionsList = new ArrayList<String>();
+
+    public static List<String> responseData = new ArrayList<String>();
+
+
 
     @Bind(R.id.btn_answeroption_1) AppCompatButton _btn_option_1;
     @Bind(R.id.btn_answeroption_2) AppCompatButton _btn_option_2;
@@ -46,6 +64,24 @@ public class QuizActivityFragment extends Fragment {
         final Bundle args = getArguments();
         ButterKnife.bind(this, rootView);
 
+        final String token = "Bearer Rqj7TTXLIX7eSQelGqMc0lxdUlZOjisBtgEAdjZ1y4SE7OO5YCmEJo7vlScIWD4TeUGnuMS33oLPwEcVfPdx6Tmv5OJE6";
+
+        HttpServerResponseTask receiveQuestionsRTask = new HttpServerResponseTask();
+        receiveQuestionsRTask.execute("QUESTIONS_10_RANDOM_PARAMS", token);
+
+        try {
+            responseData = receiveQuestionsRTask.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < responseData.size(); i++) {
+            Log.e("#####", responseData.get(i));
+
+        }
+
         Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
         _btn_option_1.setTypeface(face);
         _btn_option_2.setTypeface(face);
@@ -57,75 +93,12 @@ public class QuizActivityFragment extends Fragment {
         _tv_previous_option.setTypeface(face);
         _tv_next_option.setTypeface(face);
 
-        // 40 hardcored answers (4 x 10)
-        answersList.add("Apple");
-        answersList.add("Banana");
-        answersList.add("Orange");
-        answersList.add("Watermellon");
+        _tv_question.setText(responseData.get(args.getInt(ARG_OBJECT) * 5));
 
-        answersList.add("Red");
-        answersList.add("Green");
-        answersList.add("Orange");
-        answersList.add("Blue");
-
-        answersList.add("Those who seeks are those who finds!");
-        answersList.add("Second best is as good as last option");
-        answersList.add("Work is oveerrated");
-        answersList.add("Casual is boring");
-
-        answersList.add("5");
-        answersList.add("25");
-        answersList.add("120");
-        answersList.add("0.5");
-
-        answersList.add("Apple");
-        answersList.add("Banana");
-        answersList.add("Orange");
-        answersList.add("Watermellon");
-
-        answersList.add("Red");
-        answersList.add("Green");
-        answersList.add("Orange");
-        answersList.add("Blue");
-
-        answersList.add("Those who seeks are those who finds!");
-        answersList.add("Second best is as good as last option");
-        answersList.add("Work is oveerrated");
-        answersList.add("Casual is boring");
-
-        answersList.add("5");
-        answersList.add("25");
-        answersList.add("120");
-        answersList.add("0.5");
-
-        answersList.add("Apple");
-        answersList.add("Banana");
-        answersList.add("Orange");
-        answersList.add("Watermellon");
-
-        answersList.add("Red");
-        answersList.add("Green");
-        answersList.add("Orange");
-        answersList.add("Blue");
-
-        // 10 hardcored questions test
-        questionsList.add("Which one is your favorite!?");
-        questionsList.add("Which one is your least favorite?");
-        questionsList.add("Which statements is your favorite?");
-        questionsList.add("If x equals 5 give answer to x! ");
-        questionsList.add("Which one is your favorite!?");
-        questionsList.add("Which one is your least favorite?");
-        questionsList.add("Which statements is your favorite?");
-        questionsList.add("If x equals 5 give answer to x! ");
-        questionsList.add("Which one is your favorite!?");
-        questionsList.add("Which one is your least favorite?");
-
-        _tv_question.setText(questionsList.get(args.getInt(ARG_OBJECT) - 1));
-
-        _btn_option_1.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 4));
-        _btn_option_2.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 3));
-        _btn_option_3.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 2));
-        _btn_option_4.setText(answersList.get((args.getInt(ARG_OBJECT) * 4) - 1));
+        _btn_option_1.setText( responseData.get((args.getInt(ARG_OBJECT) * 5) +1) );
+        _btn_option_2.setText( responseData.get((args.getInt(ARG_OBJECT) * 5) +2) );
+        _btn_option_3.setText( responseData.get((args.getInt(ARG_OBJECT) * 5) +3) );
+        _btn_option_4.setText( responseData.get((args.getInt(ARG_OBJECT) * 5) +4) );
 
         // I am using this so i can track which drawable resource is set on the onClickEvent
         _btn_option_1.setTag(R.drawable.background_with_shadow);

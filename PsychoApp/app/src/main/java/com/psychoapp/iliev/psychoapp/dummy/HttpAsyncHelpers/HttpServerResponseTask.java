@@ -8,21 +8,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.psychoapp.iliev.psychoapp.dummy.Helpers.DataParser;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class HttpServerResponseTask extends AsyncTask<String, Void, String[]> {
+public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>> {
 
     private Exception exception;
     private final String HTTP_POST_METHOD = "POST";
@@ -40,11 +45,9 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, String[]> {
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    protected String[] doInBackground(String... urls) {
+    protected List<String> doInBackground(String... urls) {
 
-        // result[0] will be response message from server (control)
-        // result[1] will string with be the actual content from the outputStream from server
-        String[] result = {"", ""};
+        List<String> result = new ArrayList<String>();
         String response = null;
 
         // Do some validation here
@@ -62,6 +65,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, String[]> {
         int postDataLength = 0;
 
         BufferedReader reader = null;
+        String responseJsonStr;
 
         try {
             if (urls[0].equals("LOGIN_PARAMS")) {
@@ -134,9 +138,6 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, String[]> {
                 }
             }
 
-            response = urlConnection.getResponseMessage().toString();
-            result[0] = response;
-
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
             Log.e("INPUT STREAM", inputStream.toString());
@@ -149,51 +150,48 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, String[]> {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-                // But it does make debugging a *lot* easier if you print out the completed
-                // buffer for debugging.
                 buffer.append(line + "\n");
             }
 
             if (buffer.length() == 0) {
-                // Stream was empty.  No point in parsing.
                 return null;
             }
 
-            // TODO use adding string to result[1] to retrieve the outputStraem from server and use custom jsonParser
-            result[1] = buffer.toString();
-
-            JSONArray jsonRootObject = null;
-            try {
-                jsonRootObject = new JSONArray(result[1]);
-                for (int i = 0; i < jsonRootObject.length(); i++) {
-                    JSONObject jsonobject = jsonRootObject.getJSONObject(i);
-                    String name = jsonobject.getString("Text");
-                    Log.e("JSON obj YRAAAAAA", name);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
+            responseJsonStr = buffer.toString();
         }
         catch(Exception e) {
             Log.e("ResponseTask ERROR", e.getMessage(), e);
             return null;
+        } finally {
+            urlConnection.disconnect();
+        }
+
+        if (reader != null) {
+            try {
+                reader.close();
+            } catch (final IOException e) {
+                Log.e("IOException ", "Error closing stream", e);
+            }
+        }
+
+        // data parser follows here
+        if (urls[0].equals("QUESTIONS_10_RANDOM_PARAMS")) {
+            try {
+                result = DataParser.getQuestionsFromJsonString(responseJsonStr, 10);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         return result;
     }
 
-    protected void onPostExecute(String[] result) {
+    protected void onPostExecute(List<String> result) {
         String res = "";
-        if(result == null || result[0].equals("")) {
-            res = "NO Response from Server";
+        if(result == null || result.get(0).equals("")) {
+            res = "NO Response result from Server";
             Log.i("onPostExecute Error :", res);
-            return;
         }
 
-        Log.i("onPostExecute Result: ", result[1]);
     }
 }
