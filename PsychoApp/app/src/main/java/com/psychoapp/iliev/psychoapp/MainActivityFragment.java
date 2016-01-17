@@ -27,15 +27,15 @@ public class MainActivityFragment extends Fragment {
     }
 
     private GestureDetector gestureDetector;
+    private View view;
     View.OnTouchListener gestureListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-
+        view = inflater.inflate(R.layout.fragment_main, container, false);
+        LinearLayout listViewtext = (LinearLayout) view.findViewById(R.id.info_text);
         // set view adapters if needed here and then return the populated view
-
         final GestureDetector gesture = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
 
@@ -53,9 +53,17 @@ public class MainActivityFragment extends Fragment {
                                 "IMa event da ne powqrwash",
                                 Toast.LENGTH_SHORT).show();
 
+                        LinearLayout listViewtext = (LinearLayout) view.findViewById(R.id.info_text);
+                        listViewtext.setVisibility(View.VISIBLE);
+
                         return super.onFling(e1, e2, velocityX, velocityY);
                     }
                 });
+
+
+
+        listViewtext.setVisibility(View.GONE);
+
         LinearLayout listView = (LinearLayout) view.findViewById(R.id.info_drag);
 
 
