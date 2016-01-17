@@ -27,9 +27,6 @@ import butterknife.ButterKnife;
 public class QuizActivityFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
-    public static final String USER_PREFERENCES = "userPreferences";
-    public static final String TOKEN = "token";
-    public static final String USERNAME = "username";
 
     public static List<String> responseData = new ArrayList<String>();
 
@@ -50,11 +47,10 @@ public class QuizActivityFragment extends Fragment {
         final Bundle args = getArguments();
         ButterKnife.bind(this, rootView);
 
-        // TODO parse the token after login and pas it here
-        final String token = "Bearer Rqj7TTXLIX7eSQelGqMc0lxdUlZOjisBtgEAdjZ1y4SE7OO5YCmEJo7vlScIWD4TeUGnuMS33oLPwEcVfPdx6Tmv5OJE6";
+        QuizActivity parent = (QuizActivity)getActivity();
 
         HttpServerResponseTask receiveQuestionsRTask = new HttpServerResponseTask();
-        receiveQuestionsRTask.execute("QUESTIONS_10_RANDOM_PARAMS", token);
+        receiveQuestionsRTask.execute("QUESTIONS_10_RANDOM_PARAMS", parent.usertkn);
 
         try {
             responseData = receiveQuestionsRTask.get();
@@ -63,6 +59,7 @@ public class QuizActivityFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
 
         Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
         _btn_option_1.setTypeface(face);
