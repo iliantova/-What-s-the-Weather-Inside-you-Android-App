@@ -1,4 +1,4 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,8 +23,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
+import com.psychoapp.iliev.psychoapp.helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.helpers.HttpDataHelper;
+import com.psychoapp.iliev.psychoapp.customs.ProportionalImageView;
+import com.psychoapp.iliev.psychoapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +82,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        // use this for custom font importing to selected UI elements
-        // fonts are situated in assets/fonts
-        Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _username.setTypeface(face);
         _username.setTextSize(20);
         _passwordText.setTypeface(face);
@@ -110,7 +110,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         _signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
                 Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
@@ -162,36 +161,34 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         final String password = _passwordText.getText().toString();
 
         new android.os.Handler().postDelayed(
-            new Runnable() {
-                public void run() {
-                    HttpServerResponseTask loginTask = new HttpServerResponseTask();
-                    loginTask.execute(LOGIN_PARAMS, username, password);
+                new Runnable() {
+                    public void run() {
+                        HttpDataHelper loginTask = new HttpDataHelper();
+                        loginTask.execute(LOGIN_PARAMS, username, password);
 
-                    // this try/catch will get the response result with get()
-                    try {
-                        responseData = loginTask.get();
+                        try {
+                            responseData = loginTask.get();
 
-                        sharedpreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putString(TOKEN, responseData.get(0));
-                        editor.putString(USERNAME, responseData.get(1));
-                        editor.commit();
+                            sharedpreferences = getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putString(TOKEN, responseData.get(0));
+                            editor.putString(USERNAME, responseData.get(1));
+                            editor.commit();
 
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                        startActivityForResult(intent, REQUEST_SIGNUP);
+
+                        onLoginSuccess();
+
+                        progressDialog.dismiss();
                     }
-
-                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-                    startActivityForResult(intent, REQUEST_SIGNUP);
-
-                    onLoginSuccess();
-
-                    // onLoginFailed();
-                    progressDialog.dismiss();
-                }
-            }, 3000);
+                }, 3000);
     }
 
 

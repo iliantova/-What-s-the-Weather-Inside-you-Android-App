@@ -1,13 +1,9 @@
-package com.psychoapp.iliev.psychoapp.dummy.Helpers;
-
-import android.text.format.Time;
-import android.util.Log;
+package com.psychoapp.iliev.psychoapp.helpers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 

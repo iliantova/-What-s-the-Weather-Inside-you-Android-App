@@ -1,4 +1,4 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,7 +9,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.customs.ProportionalImageView;
+import com.psychoapp.iliev.psychoapp.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         BackGroundChanger.backgroundRandomizer(_background);
 
-        // use this for custom font importing to selected UI elements
-        Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _btn_login.setTypeface(face);
         _btn_quiz.setTypeface(face);
         _btn_camera.setTypeface(face);
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         _btn_quiz.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
         _btn_camera.setShadowLayer(10, 0, 0, R.color.themeGreenDark);
 
-        // fade in animation for background image (can use fadeout as well)
         Animation fadeIn = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
         _background.startAnimation(fadeIn);
         fadeIn.setAnimationListener(new Animation.AnimationListener() {

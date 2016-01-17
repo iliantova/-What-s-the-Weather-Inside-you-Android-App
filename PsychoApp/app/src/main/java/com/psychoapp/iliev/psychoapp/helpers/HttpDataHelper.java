@@ -1,11 +1,9 @@
-package com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers;
+package com.psychoapp.iliev.psychoapp.helpers;
 
 import android.annotation.TargetApi;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-
-import com.psychoapp.iliev.psychoapp.dummy.Helpers.DataParser;
 
 import org.json.JSONException;
 
@@ -19,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>> {
+public class HttpDataHelper extends AsyncTask<String, Void, List<String>> {
 
     private Exception exception;
     private final String HTTP_POST_METHOD = "POST";
@@ -54,7 +52,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
 
         byte[] postData = null;
         String request = null;
-        URL url  = null;
+        URL url = null;
         int postDataLength = 0;
 
         BufferedReader reader = null;
@@ -63,20 +61,20 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
         try {
             if (urls[0].equals(LOGIN_PARAMS)) {
                 // sample code for passing login body parameters
-                passedParams  =
-                        "Username="+urls[1]
-                        +"&Password="+urls[2]
-                        +"&grant_type="+"password";
+                passedParams =
+                        "Username=" + urls[1]
+                                + "&Password=" + urls[2]
+                                + "&grant_type=" + "password";
                 API_KEY = API_URL_token;
                 HTTP_METHOD = HTTP_POST_METHOD;
                 CONTENT_TYPE = CONTENT_TYPE_X_FORM;
 
             } else if (urls[0].equals(REGISTER_PARAMS)) {
-                passedParams  =
-                        "Username="+urls[1]
-                        +"&Password="+urls[2]
-                        +"&ConfirmPassword="+urls[3]
-                        +"&Email="+urls[4];
+                passedParams =
+                        "Username=" + urls[1]
+                                + "&Password=" + urls[2]
+                                + "&ConfirmPassword=" + urls[3]
+                                + "&Email=" + urls[4];
                 API_KEY = API_URL_register;
                 HTTP_METHOD = HTTP_POST_METHOD;
                 CONTENT_TYPE = CONTENT_TYPE_X_FORM;
@@ -91,14 +89,14 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
             }
 
             // if method is not GET send request body ... else no request body
-            if(!HTTP_METHOD.equals(HTTP_GET_METHOD)) {
+            if (!HTTP_METHOD.equals(HTTP_GET_METHOD)) {
                 postData = passedParams.toString().getBytes("UTF-8");
                 postDataLength = postData.length;
                 request = API_KEY;
-                url  = new URL(request);
+                url = new URL(request);
             } else {
                 request = API_KEY;
-                url  = new URL(request);
+                url = new URL(request);
             }
 
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -108,7 +106,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
             urlConnection.setRequestMethod(HTTP_METHOD);
 
             // if method is GET then add autorization header
-            if(HTTP_METHOD.equals(HTTP_GET_METHOD)) {
+            if (HTTP_METHOD.equals(HTTP_GET_METHOD)) {
                 urlConnection.setRequestProperty("Authorization", urls[1]);
             }
 
@@ -122,9 +120,9 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
             urlConnection.connect();
 
             // create request body only for POST and PUT
-            if(HTTP_METHOD.equals(HTTP_POST_METHOD) || HTTP_METHOD.equals(HTTP_PUT_METHOD)) {
-                try( DataOutputStream wr = new DataOutputStream( urlConnection.getOutputStream())) {
-                    wr.write( postData );
+            if (HTTP_METHOD.equals(HTTP_POST_METHOD) || HTTP_METHOD.equals(HTTP_PUT_METHOD)) {
+                try (DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream())) {
+                    wr.write(postData);
                 } catch (Exception e) {
                     Log.e("DataOutputStream error", e.getMessage(), e);
                     return null;
@@ -151,8 +149,7 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
             }
 
             responseJsonStr = buffer.toString();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             Log.e("ResponseTask ERROR", e.getMessage(), e);
             return null;
         } finally {
@@ -175,7 +172,6 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
                 e.printStackTrace();
             }
         } else if (urls[0].equals(LOGIN_PARAMS)) {
-            // TODO add dataParser here
             try {
                 result = DataParser.getAuthenticatedUserInformation(responseJsonStr);
             } catch (JSONException e) {
@@ -187,11 +183,9 @@ public class HttpServerResponseTask extends AsyncTask<String, Void, List<String>
     }
 
     protected void onPostExecute(List<String> result) {
-        String res = "";
-        if(result == null || result.get(0).equals("")) {
-            res = "NO Response result from Server";
+        String res = "NO Response result from Server";
+        if (result == null || result.get(0).equals("")) {
             Log.i("onPostExecute Error :", res);
         }
-
     }
 }

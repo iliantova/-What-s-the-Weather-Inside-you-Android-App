@@ -1,4 +1,4 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.customs;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -26,7 +26,6 @@ public class ProportionalImageView extends ImageView {
             int w = MeasureSpec.getSize(widthMeasureSpec);
             int h = w * d.getIntrinsicHeight() / d.getIntrinsicWidth();
             setMeasuredDimension(w, h);
-        }
-        else super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        } else super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }

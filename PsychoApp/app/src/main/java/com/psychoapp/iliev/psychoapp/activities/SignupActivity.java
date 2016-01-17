@@ -1,4 +1,4 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,8 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
+import com.psychoapp.iliev.psychoapp.helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.helpers.HttpDataHelper;
+import com.psychoapp.iliev.psychoapp.customs.ProportionalImageView;
+import com.psychoapp.iliev.psychoapp.R;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
@@ -40,7 +42,7 @@ public class SignupActivity extends AppCompatActivity {
 
         BackGroundChanger.backgroundRandomizer(_pim_backgrond_image);
 
-        Typeface face= Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/simonettaitalic.ttf");
         _et_input_name.setTypeface(face);
         _et_input_name.setTextSize(20);
         _et_input_email.setTypeface(face);
@@ -64,7 +66,6 @@ public class SignupActivity extends AppCompatActivity {
         _tv_link_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
                 finish();
             }
         });
@@ -72,7 +73,6 @@ public class SignupActivity extends AppCompatActivity {
         _tv_login_anon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and load the anonymious usage pageview
                 Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
                 startActivity(intent);
                 finish();
@@ -118,7 +118,7 @@ public class SignupActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        HttpServerResponseTask registerTask = new HttpServerResponseTask();
+                        HttpDataHelper registerTask = new HttpDataHelper();
                         registerTask.execute(REGISTER_PARAMS, username, password, password, email);
 
                         onSignupSuccess();

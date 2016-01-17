@@ -1,4 +1,4 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,14 +11,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.interfaces.FragmentChangeListener;
+import com.psychoapp.iliev.psychoapp.helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.customs.ProportionalImageView;
+import com.psychoapp.iliev.psychoapp.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class StartActivity extends AppCompatActivity implements FragmentChangeListener {
 
-    private final int BACKGROUND_IMAGES_NUM = 8;
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
     @Bind(R.id.fragment_start_conteiner) LinearLayout _ll_frag_start;
@@ -49,6 +51,7 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
         setSupportActionBar(_tb_toolbar);
         _tb_toolbar.setLogo(R.drawable.logo);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -58,12 +61,8 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             return true;
         }
@@ -73,9 +72,10 @@ public class StartActivity extends AppCompatActivity implements FragmentChangeLi
 
     @Override
     public void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ;
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_start_conteiner, fragment,DETAILFRAGMENT_TAG);
+        fragmentTransaction.replace(R.id.fragment_start_conteiner, fragment, DETAILFRAGMENT_TAG);
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
     }

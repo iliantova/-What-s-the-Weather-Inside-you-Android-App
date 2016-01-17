@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,34 +24,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignupActivity"
+            android:name=".activities.SignupActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".StartActivity"
+            android:name=".activities.StartActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".QuizActivity"
+            android:name=".activities.QuizActivity"
             android:label=""
-            android:parentActivityName=".StartActivity"
+            android:parentActivityName=".activities.StartActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.psychoapp.iliev.psychoapp.StartActivity" />
+                android:value=".activities.StartActivity" />
         </activity>
         <activity
-            android:name=".CameraActivity"
+            android:name=".activities.CameraActivity"
             android:label="@string/title_activity_camera"
-            android:parentActivityName=".StartActivity"
+            android:parentActivityName=".activities.StartActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.psychoapp.iliev.psychoapp.StartActivity" />
+                android:value=".activities.StartActivity" />
         </activity>
     </application>
 

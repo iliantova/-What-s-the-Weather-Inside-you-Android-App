@@ -1,16 +1,15 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CameraActivity">
+    tools:context=".activities.CameraActivity">
 
-    <com.psychoapp.iliev.psychoapp.ProportionalImageView
+    <com.psychoapp.iliev.psychoapp.customs.ProportionalImageView
         android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:alpha="0.7"/>
+        android:alpha="0.7" />
 
     <LinearLayout
         android:id="@+id/ll_question_form"

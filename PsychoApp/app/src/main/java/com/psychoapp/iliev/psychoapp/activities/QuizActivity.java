@@ -1,17 +1,18 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
-import com.psychoapp.iliev.psychoapp.dummy.Helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.helpers.BackGroundChanger;
+import com.psychoapp.iliev.psychoapp.customs.ProportionalImageView;
+import com.psychoapp.iliev.psychoapp.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,8 +29,7 @@ public class QuizActivity extends FragmentActivity {
     public String usertkn;
 
     @Bind(R.id.background_image) ProportionalImageView _background;
-    @Bind(R.id.pager)
-    ViewPager _viewPager;
+    @Bind(R.id.pager) ViewPager _viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +40,14 @@ public class QuizActivity extends FragmentActivity {
 
         BackGroundChanger.backgroundRandomizer(_background);
 
+//        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.music);
+//        mediaPlayer.start();
+
         SharedPreferences prefs = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         usertkn = prefs.getString(TOKEN, null);
 
-        // Create an adapter that when requested, will return a fragment representing an object in the collection.
-        // ViewPager and its adapters use support library fragments, so we must use getSupportFragmentManager.
         mQuizQuestionsPagerAdapter = new QuizQuestionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager, attaching the adapter.
         _viewPager.setAdapter(mQuizQuestionsPagerAdapter);
     }
 
@@ -57,7 +57,6 @@ public class QuizActivity extends FragmentActivity {
             super(fm);
         }
 
-        // set here the data to be bind in fragment_quiz for each question
         @Override
          public Fragment getItem(int position) {
             Fragment fragment = new QuizActivityFragment();
@@ -71,7 +70,7 @@ public class QuizActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            // For this contrived example, we have a 10-object collection.
+            // to load ten question fragments
             return 10;
         }
 

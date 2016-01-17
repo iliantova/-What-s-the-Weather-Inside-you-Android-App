@@ -1,10 +1,8 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,27 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.psychoapp.iliev.psychoapp.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainActivityFragment extends Fragment {
 
     @Bind(R.id.info_drag) LinearLayout _infoShowAndHide;
     @Bind(R.id.info_text) LinearLayout _infoText;
-
     @Bind(R.id.info_drag_text) TextView _infoShowAndHideText;
     @Bind(R.id.info_text_text) TextView _infoTextText;
 
@@ -47,9 +37,9 @@ public class MainActivityFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-    Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
-       ((TextView) _infoTextText).setTypeface(face);
-    ((TextView) _infoShowAndHideText).setTypeface(face);
+        Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
+        _infoTextText.setTypeface(face);
+        _infoShowAndHideText.setTypeface(face);
 
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
@@ -161,7 +151,7 @@ public class MainActivityFragment extends Fragment {
 
 
         //gestureDetector = new GestureDetector(getContext(),getListViewOnTouchListener());
-    return view;
+        return view;
     }
 
 }

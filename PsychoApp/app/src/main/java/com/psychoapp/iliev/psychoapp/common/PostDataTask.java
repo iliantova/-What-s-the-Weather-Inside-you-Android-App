@@ -1,4 +1,4 @@
-package com.psychoapp.iliev.psychoapp.HelpersApp;
+package com.psychoapp.iliev.psychoapp.common;
 
 
 import java.io.IOException;
@@ -15,7 +15,6 @@ public class PostDataTask {
 
     OkHttpClient client = new OkHttpClient();
 
-
     public String post(String url, String json) throws IOException {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
@@ -27,7 +26,7 @@ public class PostDataTask {
     }
 
     public String bowlingJson(String username, String password, String confirmPassword, String email) {
-        return  "{'Username':'" + username + "'}," +
+        return "{'Username':'" + username + "'}," +
                 "{'Password':'" + password + "'}," +
                 "{'ConfirmPassword':'" + confirmPassword + "'}," +
                 "{'Email':'" + email + "'},";

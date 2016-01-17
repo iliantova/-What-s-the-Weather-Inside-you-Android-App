@@ -1,26 +1,20 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-import com.psychoapp.iliev.psychoapp.HelpersApp.CRUT;
-import com.psychoapp.iliev.psychoapp.HelpersApp.PostDataTask;
+import com.psychoapp.iliev.psychoapp.common.PostDataTask;
+import com.psychoapp.iliev.psychoapp.interfaces.FragmentChangeListener;
+import com.psychoapp.iliev.psychoapp.R;
 
 import java.io.IOException;
 
@@ -29,7 +23,6 @@ import butterknife.ButterKnife;
 
 public class StartActivityFragment extends Fragment {
 
-    public static final String ARG_OBJECT = "object";
     @Bind(R.id.calendar_button) LinearLayout _calendarButton;
     @Bind(R.id.quiz_button) LinearLayout _quizButton;
     @Bind(R.id.chart_button) LinearLayout _chartButton;
@@ -61,7 +54,6 @@ public class StartActivityFragment extends Fragment {
         ((TextView) _chartButtonText).setTypeface(face);
         ((TextView) _lastResultButtonText).setTypeface(face);
 
-
 //        LinearLayout calendarButton = (LinearLayout) view.findViewById(R.id.calendar_button);
 //        calendarButton.setOnClickListener(new OnClickListener() {
 //            public void onClick(View v) {
@@ -73,6 +65,7 @@ public class StartActivityFragment extends Fragment {
 //                fragmentTransaction.commit();
 //            }
 //        });
+
         View.OnClickListener skipFrag = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,26 +74,20 @@ public class StartActivityFragment extends Fragment {
                     Toast.makeText(getContext(),
                             "This is a message displayed in a Toast",
                             Toast.LENGTH_SHORT).show();
-                }
-                else if (curentId == _quizButton.getId()){
+                } else if (curentId == _quizButton.getId()) {
                     Intent intent = new Intent(getActivity(), QuizActivity.class);
                     startActivity(intent);
 
-                }
-                else if (curentId == _chartButton.getId()){
+                } else if (curentId == _chartButton.getId()) {
                     Toast.makeText(getContext(),
                             "_chartButton",
                             Toast.LENGTH_SHORT).show();
-                   // CRUT crut = new CRUT();
-                    //crut.execute();
-
                     try {
                         PostDataTask.main();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                else if (curentId == _lastResultButton.getId()){
+                } else if (curentId == _lastResultButton.getId()) {
                     Toast.makeText(getContext(),
                             "_lastResultButton",
                             Toast.LENGTH_SHORT).show();
@@ -117,11 +104,12 @@ public class StartActivityFragment extends Fragment {
 
         return view;
     }
+
     public void showOtherFragment() {
         Fragment fr = new ResultFragment();
         FragmentChangeListener fc = (FragmentChangeListener) getActivity();
         fc.replaceFragment(fr);
     }
-    }
+}
 
 

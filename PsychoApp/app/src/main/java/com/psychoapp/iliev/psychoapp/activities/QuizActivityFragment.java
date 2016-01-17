@@ -1,10 +1,6 @@
-package com.psychoapp.iliev.psychoapp;
+package com.psychoapp.iliev.psychoapp.activities;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -15,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.psychoapp.iliev.psychoapp.dummy.HttpAsyncHelpers.HttpServerResponseTask;
+import com.psychoapp.iliev.psychoapp.helpers.HttpDataHelper;
+import com.psychoapp.iliev.psychoapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +44,9 @@ public class QuizActivityFragment extends Fragment {
         final Bundle args = getArguments();
         ButterKnife.bind(this, rootView);
 
-        QuizActivity parent = (QuizActivity)getActivity();
+        QuizActivity parent = (QuizActivity) getActivity();
 
-        HttpServerResponseTask receiveQuestionsRTask = new HttpServerResponseTask();
+        HttpDataHelper receiveQuestionsRTask = new HttpDataHelper();
         receiveQuestionsRTask.execute("QUESTIONS_10_RANDOM_PARAMS", parent.usertkn);
 
         try {
@@ -60,8 +57,7 @@ public class QuizActivityFragment extends Fragment {
             e.printStackTrace();
         }
 
-
-        Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
+        Typeface face = Typeface.createFromAsset(getActivity().getAssets(), "fonts/simonettaitalic.ttf");
         _btn_option_1.setTypeface(face);
         _btn_option_2.setTypeface(face);
         _btn_option_3.setTypeface(face);
@@ -71,7 +67,6 @@ public class QuizActivityFragment extends Fragment {
         _tv_previous_option.setTypeface(face);
         _tv_next_option.setTypeface(face);
 
-        // passing the data from QuizQuestionsPagerAdapter
         int index = args.getInt(ARG_OBJECT) - 1;
         _tv_question.setText(responseData.get(index * 9));
 
@@ -87,8 +82,6 @@ public class QuizActivityFragment extends Fragment {
         _btn_option_4.setText(responseData.get((index * 9) + 7));
         _btn_option_4.setTag(R.id.TAG_BTN_VALUE, responseData.get((index * 9) + 8));
 
-
-        // I am using this so i can track which drawable resource is set on the onClickEvent
         _btn_option_1.setTag(R.drawable.background_with_shadow);
         _btn_option_2.setTag(R.drawable.background_with_shadow);
         _btn_option_3.setTag(R.drawable.background_with_shadow);
@@ -99,7 +92,7 @@ public class QuizActivityFragment extends Fragment {
             public void onClick(View v) {
                 int currentId = v.getId();
 
-                QuizActivity parent = (QuizActivity)getActivity();
+                QuizActivity parent = (QuizActivity) getActivity();
                 parent.currentScore += Integer.valueOf(v.getTag(R.id.TAG_BTN_VALUE).toString());
 
                 Log.e("Current score VALUE : ", String.valueOf(parent.currentScore));
@@ -111,7 +104,6 @@ public class QuizActivityFragment extends Fragment {
                         v.setTag(R.drawable.background_with_shadow_lighter);
 
                         // reset the old selected button option wiht the default style
-                        // TODO here we should change the result in our DB as well
                         if (currentId != _btn_option_1.getId() &&
                                 ((Integer) _btn_option_1.getTag()).intValue() != R.drawable.background_with_shadow) {
                             _btn_option_1.setBackgroundResource(R.drawable.background_with_shadow);
@@ -134,14 +126,11 @@ public class QuizActivityFragment extends Fragment {
                             _btn_option_4.setTag(R.drawable.background_with_shadow);
                         }
 
-                    }
-                    else {
+                    } else {
                         v.setBackgroundResource(R.drawable.background_with_shadow);
                         v.setTag(1, R.drawable.background_with_shadow);
                     }
 
-                    // THIS is the code that actually change the current fragment with the next qustion fragment
-                    // _viewPager is the container element (in the activity) in which the new fragment is loaded
                     QuizActivity activity = (QuizActivity) getActivity();
                     activity._viewPager.setCurrentItem(args.getInt(ARG_OBJECT), true);
 

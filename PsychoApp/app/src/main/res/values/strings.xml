@@ -34,5 +34,5 @@
     <string name="previous">Previous</string>
     <string name="next">Next</string>
     <string name="title_activity_camera">CameraActivity</string>
-    <string name="action_camera">Photo Test</string>
+    <string name="action_camera">Settings</string>
 </resources>
