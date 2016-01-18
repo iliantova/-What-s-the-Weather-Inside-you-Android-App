@@ -40,8 +40,8 @@ public class QuizActivity extends FragmentActivity {
 
         BackGroundChanger.backgroundRandomizer(_background);
 
-//        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.music);
-//        mediaPlayer.start();
+     // MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.music);
+     //  mediaPlayer.start();
 
         SharedPreferences prefs = this.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         usertkn = prefs.getString(TOKEN, null);

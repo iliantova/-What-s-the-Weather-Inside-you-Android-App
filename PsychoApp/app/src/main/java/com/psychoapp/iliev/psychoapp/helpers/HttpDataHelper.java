@@ -37,7 +37,7 @@ public class HttpDataHelper extends AsyncTask<String, Void, List<String>> {
 
     protected void onPreExecute() {
     }
-    
+
     protected List<String> doInBackground(String... urls) {
 
         List<String> result = new ArrayList<String>();
